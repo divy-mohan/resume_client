@@ -1,3 +1,5 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +15,12 @@
     <!-- Open Graph Tags -->
     <meta property="og:title" content="{% block og_title %}Professional Writers - Resume Writing Services{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Land your dream job with professionally written resumes. Expert writers, ATS optimization, global standards.{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='images/og-image.jpg') }}{% endblock %}">
-    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/og-image.jpg' %}{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta property="og:type" content="website">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +34,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
     <!-- Additional CSS -->
     {% block additional_css %}{% endblock %}
@@ -41,7 +43,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">
+            <a class="navbar-brand" href="{% url 'writers_app:index' %}">
                 <i class="fas fa-feather-alt me-2"></i>
                 Professional Writers
             </a>
@@ -53,26 +55,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}">Home</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'writers_app:index' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="{{ url_for('about') }}">About Us</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'writers_app:about' %}">About Us</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if request.endpoint == 'services' %}active{% endif %}" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown">
                             Services
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url_for('services') }}">All Services</a></li>
+                            <li><a class="dropdown-item" href="{% url 'writers_app:services' %}">All Services</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ url_for('service_detail', service_id=1) }}">Resume Writing</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('service_detail', service_id=2) }}">LinkedIn Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('service_detail', service_id=3) }}">Cover Letters</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('service_detail', service_id=4) }}">SOP/LOR</a></li>
+                            <li><a class="dropdown-item" href="{% url 'writers_app:service_detail' slug='resume-writing' %}">Resume Writing</a></li>
+                            <li><a class="dropdown-item" href="{% url 'writers_app:service_detail' slug='linkedin-optimization' %}">LinkedIn Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'writers_app:service_detail' slug='cover-letter' %}">Cover Letters</a></li>
+                            <li><a class="dropdown-item" href="{% url 'writers_app:service_detail' slug='sop-lor' %}">SOP/LOR</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.endpoint == 'samples' %}active{% endif %}" href="{{ url_for('samples') }}">Samples</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'samples' %}active{% endif %}" href="{% url 'writers_app:samples' %}">Samples</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.endpoint == 'pricing' %}active{% endif %}" href="{{ url_for('pricing') }}">Pricing</a>
