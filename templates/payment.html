@@ -1,0 +1,391 @@
+{% extends "base.html" %}
+
+{% block title %}Payment - Professional Writers{% endblock %}
+
+{% block content %}
+<!-- Payment Header -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary me-3">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                    </a>
+                    <div>
+                        <h1 class="mb-0">Complete Your Payment</h1>
+                        <p class="text-muted mb-0">Order #{{ order.order_number }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="row g-4">
+                    <!-- Order Summary -->
+                    <div class="col-md-5">
+                        <div class="order-summary fade-in">
+                            <h3 class="mb-4">Order Summary</h3>
+                            
+                            <div class="service-details mb-4">
+                                <h5>{{ order.package.service.name }}</h5>
+                                <p class="text-muted">{{ order.package.name }} Package</p>
+                                
+                                <div class="package-features">
+                                    <h6>What's Included:</h6>
+                                    <ul class="list-unstyled">
+                                        {% set features = order.package.features | from_json if order.package.features else [] %}
+                                        {% for feature in features %}
+                                        <li><i class="fas fa-check text-success me-2"></i>{{ feature }}</li>
+                                        {% endfor %}
+                                        <li><i class="fas fa-check text-success me-2"></i>{{ order.package.delivery_days }} working days delivery</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>{{ order.package.revisions }} revisions included</li>
+                                        <li><i class="fas fa-check text-success me-2"></i>2 years free support</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="pricing-breakdown">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Service Fee:</span>
+                                    <span>{{ order.currency }}{{ order.amount }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Taxes & Fees:</span>
+                                    <span>Included</span>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between h5">
+                                    <strong>Total Amount:</strong>
+                                    <strong class="text-primary">{{ order.currency }}{{ order.amount }}</strong>
+                                </div>
+                            </div>
+                            
+                            {% if order.notes %}
+                            <div class="order-notes mt-3">
+                                <h6>Special Instructions:</h6>
+                                <p class="text-muted">{{ order.notes }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Options -->
+                    <div class="col-md-7">
+                        <div class="payment-section fade-in">
+                            <h3 class="mb-4">Choose Payment Method</h3>
+                            
+                            <!-- Payment Method Tabs -->
+                            <ul class="nav nav-pills mb-4" id="paymentTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="razorpay-tab" data-bs-toggle="pill" data-bs-target="#razorpay" type="button" role="tab">
+                                        <i class="fas fa-credit-card me-2"></i>India Payments
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="paypal-tab" data-bs-toggle="pill" data-bs-target="#paypal" type="button" role="tab">
+                                        <i class="fab fa-paypal me-2"></i>International
+                                    </button>
+                                </li>
+                            </ul>
+                            
+                            <div class="tab-content" id="paymentTabsContent">
+                                <!-- Razorpay Payment -->
+                                <div class="tab-pane fade show active" id="razorpay" role="tabpanel">
+                                    <div class="payment-option">
+                                        <div class="payment-methods mb-4">
+                                            <h5>Supported Payment Methods:</h5>
+                                            <div class="row g-3">
+                                                <div class="col-6 col-md-3">
+                                                    <div class="payment-method-icon text-center p-3 border rounded">
+                                                        <i class="fas fa-university text-primary"></i>
+                                                        <small class="d-block mt-1">Net Banking</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-3">
+                                                    <div class="payment-method-icon text-center p-3 border rounded">
+                                                        <i class="fas fa-mobile-alt text-success"></i>
+                                                        <small class="d-block mt-1">UPI</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-3">
+                                                    <div class="payment-method-icon text-center p-3 border rounded">
+                                                        <i class="fas fa-credit-card text-info"></i>
+                                                        <small class="d-block mt-1">Cards</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-3">
+                                                    <div class="payment-method-icon text-center p-3 border rounded">
+                                                        <i class="fas fa-wallet text-warning"></i>
+                                                        <small class="d-block mt-1">Wallets</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        {% if order.amount >= 2000 %}
+                                        <div class="emi-option mb-4 p-3 bg-light rounded">
+                                            <h6 class="text-success"><i class="fas fa-percentage me-2"></i>EMI Options Available</h6>
+                                            <p class="mb-0 small">Convert this payment into easy monthly installments. EMI options will be available during checkout.</p>
+                                        </div>
+                                        {% endif %}
+                                        
+                                        <button class="btn btn-primary btn-lg w-100" onclick="initiateRazorpayPayment()">
+                                            <i class="fas fa-lock me-2"></i>Pay ₹{{ order.amount }} Securely
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- PayPal Payment -->
+                                <div class="tab-pane fade" id="paypal" role="tabpanel">
+                                    <div class="payment-option">
+                                        <div class="paypal-info mb-4">
+                                            <h5>International Payment via PayPal</h5>
+                                            <p class="text-muted">Secure payment processing for international customers. PayPal accepts major credit cards and bank accounts worldwide.</p>
+                                            
+                                            <div class="paypal-features">
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fas fa-check text-success me-2"></i>Buyer Protection</li>
+                                                    <li><i class="fas fa-check text-success me-2"></i>Multiple Currency Support</li>
+                                                    <li><i class="fas fa-check text-success me-2"></i>Instant Payment Processing</li>
+                                                    <li><i class="fas fa-check text-success me-2"></i>No additional fees for customers</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="btn btn-primary btn-lg w-100" onclick="initiatePayPalPayment()">
+                                            <i class="fab fa-paypal me-2"></i>Pay ${{ "%.2f"|format(order.amount * 0.012) }} via PayPal
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Security Information -->
+                            <div class="security-info mt-4 p-3 bg-light rounded">
+                                <h6 class="text-success"><i class="fas fa-shield-alt me-2"></i>Secure Payment</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled mb-0 small">
+                                            <li><i class="fas fa-lock me-2 text-muted"></i>256-bit SSL Encryption</li>
+                                            <li><i class="fas fa-credit-card me-2 text-muted"></i>PCI DSS Compliant</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled mb-0 small">
+                                            <li><i class="fas fa-shield me-2 text-muted"></i>Fraud Protection</li>
+                                            <li><i class="fas fa-check me-2 text-muted"></i>Secure Checkout</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Money Back Guarantee -->
+                            <div class="guarantee-info mt-3 p-3 border rounded">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-certificate text-warning me-3" style="font-size: 2rem;"></i>
+                                    <div>
+                                        <h6 class="mb-1">100% Satisfaction Guarantee</h6>
+                                        <small class="text-muted">Full refund available within 7 days if not satisfied</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Processing Modal -->
+<div class="modal fade" id="paymentProcessingModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center p-5">
+                <div class="loading-spinner mb-3"></div>
+                <h5>Processing Your Payment</h5>
+                <p class="text-muted mb-0">Please wait while we securely process your payment...</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_css %}
+<style>
+.order-summary {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow-soft);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.payment-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow-soft);
+}
+
+.package-features ul li {
+    padding: 0.25rem 0;
+}
+
+.pricing-breakdown {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.payment-method-icon {
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.payment-method-icon:hover {
+    border-color: var(--secondary-blue) !important;
+    background-color: rgba(42, 82, 152, 0.1);
+}
+
+.nav-pills .nav-link {
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+}
+
+.nav-pills .nav-link.active {
+    background: var(--gradient-primary);
+}
+
+.payment-option {
+    min-height: 400px;
+}
+
+.emi-option {
+    border-left: 4px solid #28a745;
+}
+
+.security-info {
+    border-left: 4px solid #28a745;
+}
+
+.guarantee-info {
+    border-left: 4px solid #ffc107;
+}
+
+@media (max-width: 768px) {
+    .order-summary {
+        position: static;
+        margin-bottom: 2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block additional_js %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+const order = {
+    id: {{ order.id }},
+    order_number: "{{ order.order_number }}",
+    amount: {{ order.amount }},
+    currency: "{{ order.currency }}",
+    razorpay_order_id: "{{ razorpay_order.id if razorpay_order else '' }}"
+};
+
+function initiateRazorpayPayment() {
+    const options = {
+        key: "{{ config.RAZORPAY_KEY_ID or 'rzp_test_key' }}",
+        amount: order.amount * 100, // Amount in paise
+        currency: "INR",
+        name: "Professional Writers",
+        description: "{{ order.package.service.name }} - {{ order.package.name }}",
+        order_id: order.razorpay_order_id,
+        handler: function(response) {
+            showProcessingModal();
+            
+            // Submit payment details to server
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = "{{ url_for('payment_success') }}";
+            
+            const inputs = {
+                'razorpay_payment_id': response.razorpay_payment_id,
+                'razorpay_order_id': response.razorpay_order_id,
+                'razorpay_signature': response.razorpay_signature
+            };
+            
+            for (const key in inputs) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = inputs[key];
+                form.appendChild(input);
+            }
+            
+            document.body.appendChild(form);
+            form.submit();
+        },
+        prefill: {
+            name: "{{ current_user.get_full_name() }}",
+            email: "{{ current_user.email }}",
+            contact: "{{ current_user.phone or '' }}"
+        },
+        notes: {
+            order_number: order.order_number,
+            service: "{{ order.package.service.name }}"
+        },
+        theme: {
+            color: "#2a5298"
+        },
+        modal: {
+            ondismiss: function() {
+                console.log('Payment cancelled');
+            }
+        }
+    };
+    
+    const rzp = new Razorpay(options);
+    rzp.open();
+}
+
+function initiatePayPalPayment() {
+    showProcessingModal();
+    
+    // In a real application, this would integrate with PayPal SDK
+    setTimeout(() => {
+        hideProcessingModal();
+        alert('PayPal integration would be implemented here. This is a demo.');
+    }, 2000);
+}
+
+function showProcessingModal() {
+    const modal = new bootstrap.Modal(document.getElementById('paymentProcessingModal'));
+    modal.show();
+}
+
+function hideProcessingModal() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('paymentProcessingModal'));
+    if (modal) {
+        modal.hide();
+    }
+}
+
+// Handle payment method icon selection
+document.querySelectorAll('.payment-method-icon').forEach(icon => {
+    icon.addEventListener('click', function() {
+        // Visual feedback for payment method selection
+        document.querySelectorAll('.payment-method-icon').forEach(i => i.classList.remove('selected'));
+        this.classList.add('selected');
+    });
+});
+</script>
+{% endblock %}

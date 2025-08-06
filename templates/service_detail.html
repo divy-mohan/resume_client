@@ -1,0 +1,375 @@
+{% extends "base.html" %}
+
+{% block title %}{{ service.name }} - Professional Writers{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="min-height: 50vh;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title">{{ service.name }}</h1>
+                    <p class="hero-subtitle">{{ service.description }}</p>
+                    <div class="hero-buttons">
+                        <a href="#packages" class="btn btn-light btn-lg">View Packages</a>
+                        <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Talk to Expert</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="slide-in-right">
+                    {% if service.name == 'Resume Writing' %}
+                    <img src="https://pixabay.com/get/geba2fe2ce961f431c9cfda48f5620ca8c525985151b73c1875b4b4c24f572ee00a46b593963bc9f772162e4174472a1ce1a47612290138686f21aff47c9084e1_1280.jpg" 
+                         alt="Resume writing workspace" class="img-fluid rounded-3 shadow-lg">
+                    {% elif service.name == 'LinkedIn Profile Optimization' %}
+                    <img src="https://pixabay.com/get/g611b286c4240d0a5dc8697d170d76d059278723e57afbd7e4d860d68fefaeb1316d99cfdfadcc1a7f36a237fdab71c3998a8707e6f48d8cf09a2b76368c05d30_1280.jpg" 
+                         alt="Professional team collaboration" class="img-fluid rounded-3 shadow-lg">
+                    {% else %}
+                    <img src="https://pixabay.com/get/ga05c0b7e06313bbdb30512e6dc5fcb6b0429737ebde7e58e704f0777eab7f4b14330451712affd1ae43480f5b7aacb554a12affb33e77ee4c152e08bb5783aaf_1280.jpg" 
+                         alt="Professional writing" class="img-fluid rounded-3 shadow-lg">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What's Included -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">What's Included</h2>
+                <p class="lead fade-in">Comprehensive service features designed for your success</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% if service.name == 'Resume Writing' %}
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h5>ATS Optimization</h5>
+                    <p>Keyword-optimized format that passes Applicant Tracking Systems used by 95% of companies</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h5>Professional Design</h5>
+                    <p>Clean, modern design that's visually appealing while maintaining professional standards</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h5>Industry Keywords</h5>
+                    <p>Strategic keyword placement based on your target industry and role requirements</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h5>Achievement Focus</h5>
+                    <p>Quantified accomplishments that demonstrate your impact and value to employers</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h5>Global Standards</h5>
+                    <p>Format suitable for India, US, UK, Canada, and other international job markets</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <h5>Unlimited Revisions</h5>
+                    <p>Free revisions until you're completely satisfied with your resume</p>
+                </div>
+            </div>
+            {% elif service.name == 'LinkedIn Profile Optimization' %}
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h5>Compelling Headline</h5>
+                    <p>Attention-grabbing professional headline that showcases your unique value proposition</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h5>Optimized Summary</h5>
+                    <p>Engaging summary section that tells your professional story and attracts recruiters</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h5>Skills Enhancement</h5>
+                    <p>Strategic skills section optimization to improve your searchability</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                    <h5>SEO Optimization</h5>
+                    <p>Profile optimization for LinkedIn's search algorithm to increase visibility</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h5>Experience Showcase</h5>
+                    <p>Professional formatting of your work experience to highlight key achievements</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h5>Networking Tips</h5>
+                    <p>Guidance on building connections and leveraging LinkedIn for career growth</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h5>Expert Writing</h5>
+                    <p>Professional writers with industry expertise craft compelling content</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-target"></i>
+                    </div>
+                    <h5>Personalized Content</h5>
+                    <p>Tailored content that reflects your unique background and career goals</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h5>Quality Assurance</h5>
+                    <p>Multiple rounds of review to ensure error-free, professional documents</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Packages Section -->
+<section id="packages" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Choose Your Package</h2>
+                <p class="lead fade-in">Select the package that best fits your career level and needs</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for package in packages %}
+            <div class="col-lg-3 col-md-6">
+                <div class="pricing-card {% if package.name == 'Premium' %}featured{% endif %} fade-in">
+                    {% if package.name == 'Premium' %}
+                    <div class="pricing-badge">Most Popular</div>
+                    {% endif %}
+                    
+                    <h4>{{ package.name }}</h4>
+                    <div class="pricing-price">₹{{ package.price_inr }}</div>
+                    <p class="text-muted">${{ package.price_usd }} USD</p>
+                    
+                    <ul class="pricing-features">
+                        {% set features = package.features | from_json if package.features else [] %}
+                        {% for feature in features %}
+                        <li class="included"><i class="fas fa-check me-2"></i>{{ feature }}</li>
+                        {% endfor %}
+                        <li class="included"><i class="fas fa-check me-2"></i>{{ package.delivery_days }} working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>{{ package.revisions }} revisions included</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>2 years free support</li>
+                    </ul>
+                    
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('create_order', package_id=package.id) }}" class="btn btn-primary w-100">Order Now</a>
+                    {% else %}
+                    <a href="{{ url_for('register') }}" class="btn btn-primary w-100">Get Started</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Sample Preview -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Sample Work</h2>
+                <p class="lead fade-in">See the quality of our professional work</p>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="sample-preview fade-in">
+                    <div class="card">
+                        <div class="card-body text-center p-5">
+                            <i class="fas fa-file-pdf text-primary" style="font-size: 4rem;"></i>
+                            <h4 class="mt-3">{{ service.name }} Sample</h4>
+                            <p class="text-muted">View a sample of our professional {{ service.name.lower() }} work</p>
+                            <a href="{{ url_for('samples') }}" class="btn btn-outline-primary">View Sample Gallery</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Client Results -->
+{% if testimonials %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Client Success Stories</h2>
+                <p class="lead fade-in">Real results from professionals like you</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for testimonial in testimonials %}
+            <div class="col-lg-4">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-avatar">
+                        {{ testimonial.client_name[0] }}
+                    </div>
+                    <div class="stars">
+                        {% for i in range(testimonial.rating) %}
+                        <i class="fas fa-star"></i>
+                        {% endfor %}
+                    </div>
+                    <p class="testimonial-text">"{{ testimonial.testimonial }}"</p>
+                    <div class="client-info">
+                        <strong>{{ testimonial.client_name }}</strong><br>
+                        {{ testimonial.client_title }} at {{ testimonial.client_company }}<br>
+                        <small>{{ testimonial.client_location }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- FAQ Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <h2 class="fade-in">Frequently Asked Questions</h2>
+                </div>
+                
+                <div class="accordion" id="faqAccordion">
+                    {% if service.name == 'Resume Writing' %}
+                    <div class="accordion-item fade-in">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How long does it take to complete my resume?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Our standard delivery time ranges from 2-7 working days depending on the package you choose. Rush delivery options are available for urgent requirements.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item fade-in">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Is my resume guaranteed to pass ATS systems?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, all our resumes are ATS-optimized using the latest industry standards and tested with major ATS platforms used by companies.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item fade-in">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                What if I'm not satisfied with my resume?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We offer unlimited revisions until you're completely satisfied. Additionally, we provide a 100% satisfaction guarantee with our refund policy.
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5" style="background: var(--gradient-primary);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="fade-in mb-4">Ready to Get Started?</h2>
+                <p class="lead fade-in mb-4">Take the first step toward landing your dream job with our expert {{ service.name.lower() }} service.</p>
+                <div class="fade-in">
+                    {% if current_user.is_authenticated %}
+                    <a href="#packages" class="btn btn-light btn-lg me-3">Choose Package</a>
+                    {% else %}
+                    <a href="{{ url_for('register') }}" class="btn btn-light btn-lg me-3">Get Started</a>
+                    {% endif %}
+                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Talk to Expert</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

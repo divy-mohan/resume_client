@@ -1,0 +1,420 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ - Professional Writers{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="min-height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title">Frequently Asked Questions</h1>
+                    <p class="hero-subtitle">Find answers to common questions about our services and process</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Categories -->
+<section class="py-3 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="faqCategory" id="allFAQ" checked>
+                    <label class="btn btn-outline-primary" for="allFAQ">All Questions</label>
+                    
+                    <input type="radio" class="btn-check" name="faqCategory" id="generalFAQ">
+                    <label class="btn btn-outline-primary" for="generalFAQ">General</label>
+                    
+                    <input type="radio" class="btn-check" name="faqCategory" id="servicesFAQ">
+                    <label class="btn btn-outline-primary" for="servicesFAQ">Services</label>
+                    
+                    <input type="radio" class="btn-check" name="faqCategory" id="pricingFAQ">
+                    <label class="btn btn-outline-primary" for="pricingFAQ">Pricing</label>
+                    
+                    <input type="radio" class="btn-check" name="faqCategory" id="processFAQ">
+                    <label class="btn btn-outline-primary" for="processFAQ">Process</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- General FAQs -->
+                <div class="faq-category" data-category="general">
+                    <h3 class="mb-4 fade-in">General Questions</h3>
+                    
+                    <div class="accordion mb-5" id="generalAccordion">
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#general1">
+                                    What is Professional Writers and what do you do?
+                                </button>
+                            </h2>
+                            <div id="general1" class="accordion-collapse collapse show" data-bs-parent="#generalAccordion">
+                                <div class="accordion-body">
+                                    Professional Writers is India's leading career documentation service. We specialize in creating professionally written resumes, LinkedIn profiles, cover letters, SOPs, and LORs that help job seekers land their dream positions. Our team consists of experienced writers from top institutions like IIT and IIM who understand what recruiters are looking for.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#general2">
+                                    How are you different from other resume writing services?
+                                </button>
+                            </h2>
+                            <div id="general2" class="accordion-collapse collapse" data-bs-parent="#generalAccordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li><strong>Expert Writers:</strong> Our team includes IIT/IIM alumni and industry professionals</li>
+                                        <li><strong>2-Year Support:</strong> Free updates and revisions for 2 full years</li>
+                                        <li><strong>ATS + Human Optimization:</strong> We ensure your resume passes both systems and impresses recruiters</li>
+                                        <li><strong>Global Standards:</strong> Documents suitable for India and international markets</li>
+                                        <li><strong>Proven Results:</strong> 80,000+ resumes delivered with 95% success rate</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#general3">
+                                    Do you work with all industries and career levels?
+                                </button>
+                            </h2>
+                            <div id="general3" class="accordion-collapse collapse" data-bs-parent="#generalAccordion">
+                                <div class="accordion-body">
+                                    Yes, we work with professionals across all industries including IT, Finance, Marketing, Healthcare, Engineering, Consulting, and more. We handle all career levels from fresh graduates to C-level executives. Our writers are trained to understand industry-specific requirements and terminology.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Services FAQs -->
+                <div class="faq-category" data-category="services" style="display: none;">
+                    <h3 class="mb-4 fade-in">Services Questions</h3>
+                    
+                    <div class="accordion mb-5" id="servicesAccordion">
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#services1">
+                                    What's included in your resume writing service?
+                                </button>
+                            </h2>
+                            <div id="services1" class="accordion-collapse collapse show" data-bs-parent="#servicesAccordion">
+                                <div class="accordion-body">
+                                    Our resume writing service includes:
+                                    <ul>
+                                        <li>Professional formatting and design</li>
+                                        <li>ATS optimization with relevant keywords</li>
+                                        <li>Achievement-focused content writing</li>
+                                        <li>Industry-specific customization</li>
+                                        <li>Multiple revisions until satisfied</li>
+                                        <li>2 years of free updates</li>
+                                        <li>Both Word and PDF formats</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#services2">
+                                    What is ATS optimization and why is it important?
+                                </button>
+                            </h2>
+                            <div id="services2" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                                <div class="accordion-body">
+                                    ATS (Applicant Tracking System) optimization ensures your resume passes through automated screening systems used by 95% of companies. We optimize by:
+                                    <ul>
+                                        <li>Using ATS-friendly formatting</li>
+                                        <li>Including relevant keywords from job descriptions</li>
+                                        <li>Proper section headings and structure</li>
+                                        <li>Avoiding graphics and complex designs that confuse ATS</li>
+                                    </ul>
+                                    Without ATS optimization, your resume may never reach human recruiters.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#services3">
+                                    Do you write resumes for international job applications?
+                                </button>
+                            </h2>
+                            <div id="services3" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                                <div class="accordion-body">
+                                    Yes, we specialize in international resume formats for US, UK, Canada, Australia, and European markets. Our international resume service includes:
+                                    <ul>
+                                        <li>Country-specific formatting and style</li>
+                                        <li>Cultural adaptation of content</li>
+                                        <li>Local terminology and conventions</li>
+                                        <li>Compliance with regional standards</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pricing FAQs -->
+                <div class="faq-category" data-category="pricing" style="display: none;">
+                    <h3 class="mb-4 fade-in">Pricing Questions</h3>
+                    
+                    <div class="accordion mb-5" id="pricingAccordion">
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pricing1">
+                                    How much do your services cost?
+                                </button>
+                            </h2>
+                            <div id="pricing1" class="accordion-collapse collapse show" data-bs-parent="#pricingAccordion">
+                                <div class="accordion-body">
+                                    Our pricing varies by service and package:
+                                    <ul>
+                                        <li><strong>Resume Writing:</strong> ₹999 - ₹4,999 (depending on level)</li>
+                                        <li><strong>LinkedIn Optimization:</strong> ₹1,499 - ₹2,999</li>
+                                        <li><strong>Cover Letter:</strong> ₹799 - ₹1,499</li>
+                                        <li><strong>SOP/LOR:</strong> ₹1,999 - ₹3,999</li>
+                                        <li><strong>Complete Package:</strong> ₹4,999 (saves ₹1,500)</li>
+                                    </ul>
+                                    All packages include 2 years of free support and updates.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pricing2">
+                                    Do you offer refunds if I'm not satisfied?
+                                </button>
+                            </h2>
+                            <div id="pricing2" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
+                                <div class="accordion-body">
+                                    Yes, we offer a 100% satisfaction guarantee with a 7-day refund policy. If you're not completely satisfied with our work, we'll provide a full refund within 7 days of delivery. However, we also offer unlimited revisions during the development process to ensure your satisfaction.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pricing3">
+                                    What payment methods do you accept?
+                                </button>
+                            </h2>
+                            <div id="pricing3" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
+                                <div class="accordion-body">
+                                    We accept multiple payment methods:
+                                    <ul>
+                                        <li><strong>India:</strong> Razorpay, UPI, Net Banking, Credit/Debit Cards</li>
+                                        <li><strong>International:</strong> PayPal, Stripe, International Cards</li>
+                                        <li><strong>EMI Options:</strong> Available for orders above ₹2,000</li>
+                                    </ul>
+                                    All payments are processed securely with 256-bit SSL encryption.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Process FAQs -->
+                <div class="faq-category" data-category="process" style="display: none;">
+                    <h3 class="mb-4 fade-in">Process Questions</h3>
+                    
+                    <div class="accordion mb-5" id="processAccordion">
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#process1">
+                                    How long does it take to complete my resume?
+                                </button>
+                            </h2>
+                            <div id="process1" class="accordion-collapse collapse show" data-bs-parent="#processAccordion">
+                                <div class="accordion-body">
+                                    Delivery times vary by package:
+                                    <ul>
+                                        <li><strong>Fresher Package:</strong> 2 working days</li>
+                                        <li><strong>Premium Package:</strong> 3 working days</li>
+                                        <li><strong>Executive Package:</strong> 5 working days</li>
+                                        <li><strong>International Package:</strong> 7 working days</li>
+                                    </ul>
+                                    Rush delivery (24 hours) is available for urgent requirements with additional charges.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#process2">
+                                    What information do you need from me?
+                                </button>
+                            </h2>
+                            <div id="process2" class="accordion-collapse collapse" data-bs-parent="#processAccordion">
+                                <div class="accordion-body">
+                                    We'll need:
+                                    <ul>
+                                        <li>Your current resume (if available)</li>
+                                        <li>Target job titles and companies</li>
+                                        <li>Educational background details</li>
+                                        <li>Work experience information</li>
+                                        <li>Key achievements and accomplishments</li>
+                                        <li>Skills and certifications</li>
+                                        <li>Any specific requirements or preferences</li>
+                                    </ul>
+                                    Our team will guide you through the information gathering process.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item fade-in">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#process3">
+                                    Will I be able to communicate with my writer?
+                                </button>
+                            </h2>
+                            <div id="process3" class="accordion-collapse collapse" data-bs-parent="#processAccordion">
+                                <div class="accordion-body">
+                                    Yes! We provide multiple communication channels:
+                                    <ul>
+                                        <li>Direct chat through your dashboard</li>
+                                        <li>WhatsApp support</li>
+                                        <li>Email communication</li>
+                                        <li>Phone consultation (for premium packages)</li>
+                                    </ul>
+                                    You'll have a dedicated coordinator who will be your primary point of contact throughout the process.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Still Have Questions -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="fade-in">
+                    <i class="fas fa-question-circle text-primary" style="font-size: 4rem;"></i>
+                    <h2 class="mt-3">Still Have Questions?</h2>
+                    <p class="lead">Can't find the answer you're looking for? Our support team is here to help!</p>
+                    
+                    <div class="row g-4 mt-4">
+                        <div class="col-md-4">
+                            <div class="contact-option">
+                                <i class="fas fa-phone text-primary fs-2"></i>
+                                <h5 class="mt-2">Call Us</h5>
+                                <p class="text-muted">+91-9876-543-210</p>
+                                <small class="text-muted">Mon-Fri: 9AM-7PM IST</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-option">
+                                <i class="fab fa-whatsapp text-success fs-2"></i>
+                                <h5 class="mt-2">WhatsApp</h5>
+                                <a href="https://wa.me/919876543210" class="btn btn-success btn-sm mt-2">
+                                    <i class="fab fa-whatsapp me-1"></i>Chat Now
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-option">
+                                <i class="fas fa-envelope text-info fs-2"></i>
+                                <h5 class="mt-2">Email Us</h5>
+                                <p class="text-muted">support@professionalwriters.com</p>
+                                <small class="text-muted">Response within 2-4 hours</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg me-3">Contact Support</a>
+                        <a href="{{ url_for('services') }}" class="btn btn-outline-primary btn-lg">View Services</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block additional_css %}
+<style>
+.faq-category {
+    margin-bottom: 3rem;
+}
+
+.accordion-button {
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--primary-blue);
+    background-color: rgba(30, 60, 114, 0.1);
+    border-color: var(--secondary-blue);
+}
+
+.accordion-button:not(.collapsed)::after {
+    filter: invert(1);
+}
+
+.accordion-body ul {
+    padding-left: 1.2rem;
+}
+
+.accordion-body ul li {
+    margin-bottom: 0.5rem;
+}
+
+.contact-option {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+}
+
+.contact-option:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+</style>
+{% endblock %}
+
+{% block additional_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // FAQ Category filtering
+    const categoryButtons = document.querySelectorAll('input[name="faqCategory"]');
+    const faqCategories = document.querySelectorAll('.faq-category');
+    
+    categoryButtons.forEach(button => {
+        button.addEventListener('change', function() {
+            const category = this.id.replace('FAQ', '').replace('all', '');
+            
+            faqCategories.forEach(categoryDiv => {
+                if (category === '' || categoryDiv.dataset.category === category) {
+                    categoryDiv.style.display = 'block';
+                } else {
+                    categoryDiv.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

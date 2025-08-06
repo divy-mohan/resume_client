@@ -1,0 +1,235 @@
+🎨 **Brand Guidelines (Base for Design)**
+
+* **Primary Colors**: Deep blue to sky blue gradient (as in the logo) — symbolizes trust, intelligence, professionalism.
+* **Secondary Colors**: Light grey and white with subtle gradients.
+* **Font Style**:
+
+  * Headings: Playfair Display / Merriweather (modern serif)
+  * Body Text: Lato / Open Sans (clean sans-serif)
+* **Accent Elements**: Use the feather/quill from the logo in icons, section dividers, and buttons.
+
+---
+
+🌐 **Full Website Page-wise Layout for "Professional Writers"**
+
+---
+
+## 🏠 1. Homepage
+
+**Header:**
+
+* Logo (left)
+* Navigation: About Us | Services | Samples | Pricing | Contact
+* CTA Button: "Get Started"
+* Optional: Language Switcher
+
+**Hero Section:**
+
+* Title: “Land Your Dream Job with a Winning Resume”
+* Subtitle: “Professionally written resumes for India, US, and beyond”
+* Buttons: \[Get Resume Now] \[Free Consultation]
+* Visual: Image of a professional + globe or flag icons (India, US, UK)
+
+**Why Choose Us (Icons + Text):**
+
+* 🎓 IIT/IIM Alumni Writers
+* 🌍 Global Resume Standards
+* 🧠 AI + Human Expertise
+* 📞 24x7 Client Support
+
+**Services Preview Section:**
+
+* Resume Writing | LinkedIn Profile | Cover Letter | SOP/LOR | ATS Optimization
+* Each card: 1-liner + "Learn More" button
+
+**Client Testimonials:**
+
+* Carousel with photos, name, location, service used, star ratings
+
+**Companies Where Clients Got Placed:**
+
+* Logos: Amazon, Google, Deloitte, TCS, Infosys
+
+**Call-to-Action Section:**
+
+* “Not Sure Where to Start? Let’s Talk” + \[Free Consultation Button]
+
+**Footer:**
+
+* Contact Info | Quick Links | Social Media Icons | Certifications (ISO, GDPR Ready)
+
+---
+
+## 📄 2. About Us Page
+
+**Hero Banner:**
+
+* Tagline: “Your Stories. Our Words.”
+* Image: Quill writing on parchment or modern workspace
+
+**Sections:**
+
+* Our Story
+* Our Team (photos, short bios)
+* Vision & Mission (for India + international audience)
+* Why We’re Different (vs freelancers or AI-only tools)
+* Optional Video: Founder's message
+
+---
+
+## 🧾 3. Services Page
+
+**Hero:** “What We Offer”
+
+**Grid of Services:**
+Each card includes icon, name, 1-line description, and "Explore" link
+
+1. Resume Writing
+2. Cover Letter Writing
+3. LinkedIn Optimization
+4. SOP/LOR (Study Abroad)
+5. International Resume Writing
+6. Career Counselling
+
+---
+
+## 📜 4. Individual Service Pages (e.g., Resume Writing)
+
+**Header Image:** Related to the service
+
+**Sections:**
+
+* What's Included
+* Packages: Basic | Premium | Executive | International
+* Sample Preview
+* Client Results (before/after resumes)
+* FAQs
+* CTA: \[Order Now] \[Talk to Expert]
+
+---
+
+## 💵 5. Pricing Page
+
+**Tabs or Tables:**
+
+* Tabs: India | International
+* Plans: Resume Only | Resume + Cover | LinkedIn Bundle
+
+**Table Format:**
+
+| Plan          | Features             | Price |
+| ------------- | -------------------- | ----- |
+| Fresher       | Basic resume, 1 page | ₹999  |
+| Premium       | Designer, ATS-proof  | ₹2499 |
+| International | US/UK Format         | ₹3999 |
+
+**Payment Options:**
+
+* Razorpay / PayPal / Stripe
+* EMI options above ₹2000
+
+---
+
+## 📚 6. Samples Page
+
+**Grid Gallery:**
+
+* Resume Before/After
+* Cover Letter (screenshot)
+* LinkedIn Profile snippets
+* SOP/LOR Examples (blurred)
+
+**Download Button:** PDF with watermark
+
+---
+
+## 🧠 7. FAQs Page
+
+**Accordion Format:**
+
+* General
+* International Resume
+* Turnaround Time
+* Revision & Refund Policy
+
+---
+
+## 📝 8. Blog Page
+
+**Content Cards:**
+
+* Image thumbnail + title + short excerpt + "Read More"
+
+**Sidebar Widgets:**
+
+* Search
+* Categories
+* Recent Posts
+* Tags
+
+**Sample Posts:**
+
+* “Top 5 Resume Mistakes to Avoid”
+* “What is ATS and Why You Need to Care”
+* “Writing an SOP for Canada – Do’s and Don’ts”
+
+---
+
+## 📞 9. Contact Us Page
+
+**Contact Form:**
+
+* Name, Email, WhatsApp, Message, Choose Service
+
+**Contact Info Section:**
+
+* Address (India)
+* Email, Phone
+* WhatsApp Button
+* Calendly Link (optional)
+* Embedded Google Map
+
+---
+
+## 👤 10. Client Dashboard (Logged-in Area)
+
+* Upload Resume
+* Track Status
+* Chat with Assigned Writer
+* View Invoices/Payment
+* Feedback & Rating
+
+---
+
+## ✅ 11. Testimonials Page
+
+**Layout:**
+
+* Grid of client cards: Name, country flag, service, rating, testimonial
+* Optional: LinkedIn screenshot or video review
+
+---
+
+## 🔒 12. Terms, Privacy & Refund Policy
+
+**Pages:**
+
+* Terms of Service
+* GDPR-Compliant Privacy Policy
+* Clear Refund/Cancellation Policy
+
+---
+
+## ✅ Final Suggestions
+
+**Design Aesthetic:**
+
+* Minimal, whitespace-rich
+* Clean typography
+* Trust-building content
+
+**Bonus Features:**
+
+* WhatsApp Sticky Button
+* Popups: Free Resume Review
+* Testimonials Carousel on Home + Service Pages

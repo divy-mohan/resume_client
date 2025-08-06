@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+
+{% block title %}Pricing - Professional Writers{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="min-height: 50vh;">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title">Transparent Pricing</h1>
+                    <p class="hero-subtitle">Choose the perfect package for your career goals. No hidden fees, guaranteed quality.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Toggle -->
+<section class="py-3 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="pricingRegion" id="indiaToggle" checked>
+                    <label class="btn btn-outline-primary" for="indiaToggle">India (₹)</label>
+                    
+                    <input type="radio" class="btn-check" name="pricingRegion" id="internationalToggle">
+                    <label class="btn btn-outline-primary" for="internationalToggle">International ($)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Tables -->
+<section class="pricing-section py-5">
+    <div class="container">
+        {% for service in services %}
+        <div class="service-pricing mb-5">
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="fade-in">{{ service.name }}</h2>
+                    <p class="lead fade-in text-muted">{{ service.short_description }}</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                {% for package in packages_by_service[service.id] %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card {% if package.name == 'Premium' %}featured{% endif %} fade-in">
+                        {% if package.name == 'Premium' %}
+                        <div class="pricing-badge">Most Popular</div>
+                        {% endif %}
+                        
+                        <div class="text-center">
+                            <h4>{{ package.name }}</h4>
+                            <div class="pricing-price india-price">₹{{ package.price_inr }}</div>
+                            <div class="pricing-price international-price" style="display: none;">${{ package.price_usd }}</div>
+                            
+                            {% if package.name == 'Fresher' %}
+                            <p class="text-muted">Perfect for fresh graduates</p>
+                            {% elif package.name == 'Premium' %}
+                            <p class="text-muted">Most comprehensive package</p>
+                            {% elif package.name == 'Executive' %}
+                            <p class="text-muted">For senior professionals</p>
+                            {% elif package.name == 'International' %}
+                            <p class="text-muted">Global job market ready</p>
+                            {% endif %}
+                        </div>
+                        
+                        <ul class="pricing-features">
+                            {% if package.name == 'Fresher' %}
+                            <li class="included"><i class="fas fa-check me-2"></i>1-2 page resume</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>ATS optimization</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Basic design</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>2 revisions</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Email support</li>
+                            <li class="not-included"><i class="fas fa-times me-2"></i>Cover letter</li>
+                            <li class="not-included"><i class="fas fa-times me-2"></i>LinkedIn optimization</li>
+                            {% elif package.name == 'Premium' %}
+                            <li class="included"><i class="fas fa-check me-2"></i>Professional resume</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Advanced ATS optimization</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Premium design</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Cover letter</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>3 revisions</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Phone consultation</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>LinkedIn tips</li>
+                            {% elif package.name == 'Executive' %}
+                            <li class="included"><i class="fas fa-check me-2"></i>Executive resume</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Leadership focus</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Executive design</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Cover letter</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>LinkedIn optimization</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>5 revisions</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Priority support</li>
+                            {% elif package.name == 'International' %}
+                            <li class="included"><i class="fas fa-check me-2"></i>Global format resume</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Country-specific optimization</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>International design</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Cover letter</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>LinkedIn optimization</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>5 revisions</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>Dedicated support</li>
+                            {% endif %}
+                            <li class="included"><i class="fas fa-check me-2"></i>{{ package.delivery_days }} days delivery</li>
+                            <li class="included"><i class="fas fa-check me-2"></i>2 years free support</li>
+                        </ul>
+                        
+                        <div class="mt-auto">
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('create_order', package_id=package.id) }}" class="btn btn-primary w-100">Order Now</a>
+                            {% else %}
+                            <a href="{{ url_for('register') }}" class="btn btn-primary w-100">Get Started</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Bundle Offers -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Bundle Offers</h2>
+                <p class="lead fade-in">Save more with our combo packages</p>
+            </div>
+        </div>
+        
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4">
+                <div class="pricing-card featured fade-in">
+                    <div class="pricing-badge">Best Value</div>
+                    <h4>Complete Package</h4>
+                    <div class="pricing-price india-price">₹4,999</div>
+                    <div class="pricing-price international-price" style="display: none;">$60</div>
+                    <p class="text-muted">Everything you need for job success</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Professional Resume</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Cover Letter</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>LinkedIn Optimization</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Career Consultation</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Interview Tips</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>5 revisions</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Priority support</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Save ₹1,500</li>
+                    </ul>
+                    
+                    {% if current_user.is_authenticated %}
+                    <a href="#" class="btn btn-primary w-100">Order Bundle</a>
+                    {% else %}
+                    <a href="{{ url_for('register') }}" class="btn btn-primary w-100">Get Started</a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="pricing-card fade-in">
+                    <h4>Student Special</h4>
+                    <div class="pricing-price india-price">₹1,999</div>
+                    <div class="pricing-price international-price" style="display: none;">$25</div>
+                    <p class="text-muted">Perfect for fresh graduates</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Student Resume</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Cover Letter</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>LinkedIn Setup</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Job Search Tips</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>3 revisions</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Email support</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Save ₹500</li>
+                    </ul>
+                    
+                    {% if current_user.is_authenticated %}
+                    <a href="#" class="btn btn-outline-primary w-100">Order Bundle</a>
+                    {% else %}
+                    <a href="{{ url_for('register') }}" class="btn btn-outline-primary w-100">Get Started</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Options -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fade-in mb-4">Secure Payment Options</h2>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="payment-option fade-in">
+                            <i class="fas fa-credit-card text-primary fs-1 mb-3"></i>
+                            <h5>India Payments</h5>
+                            <p>Razorpay, UPI, Net Banking, Cards</p>
+                            <p class="text-muted">EMI options available above ₹2000</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="payment-option fade-in">
+                            <i class="fab fa-paypal text-primary fs-1 mb-3"></i>
+                            <h5>International Payments</h5>
+                            <p>PayPal, Stripe, International Cards</p>
+                            <p class="text-muted">Secure global payment processing</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 fade-in">
+                    <p class="text-muted">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        All payments are processed securely with 256-bit SSL encryption
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Money Back Guarantee -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="fade-in">
+                    <i class="fas fa-certificate text-success" style="font-size: 4rem;"></i>
+                    <h2 class="mt-3">100% Satisfaction Guarantee</h2>
+                    <p class="lead">We're confident in our quality. If you're not completely satisfied with our work, we'll refund your money within 7 days of delivery.</p>
+                    
+                    <div class="row g-4 mt-4">
+                        <div class="col-md-4">
+                            <i class="fas fa-undo text-primary fs-2"></i>
+                            <h6 class="mt-2">7-Day Refund</h6>
+                            <small class="text-muted">Full refund if not satisfied</small>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-sync text-primary fs-2"></i>
+                            <h6 class="mt-2">Unlimited Revisions</h6>
+                            <small class="text-muted">Until you're completely happy</small>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-handshake text-primary fs-2"></i>
+                            <h6 class="mt-2">2-Year Support</h6>
+                            <small class="text-muted">Free updates for 2 years</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <h2 class="fade-in">Pricing FAQ</h2>
+                </div>
+                
+                <div class="accordion" id="pricingFAQ">
+                    <div class="accordion-item fade-in">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pricing-faq1">
+                                Do you offer discounts for bulk orders?
+                            </button>
+                        </h2>
+                        <div id="pricing-faq1" class="accordion-collapse collapse show" data-bs-parent="#pricingFAQ">
+                            <div class="accordion-body">
+                                Yes, we offer special discounts for companies ordering resumes for multiple employees. Contact us for custom pricing.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item fade-in">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pricing-faq2">
+                                Can I pay in installments?
+                            </button>
+                        </h2>
+                        <div id="pricing-faq2" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                            <div class="accordion-body">
+                                EMI options are available for orders above ₹2000 through our payment partners. International customers can use PayPal Credit.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item fade-in">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pricing-faq3">
+                                What's included in the 2-year support?
+                            </button>
+                        </h2>
+                        <div id="pricing-faq3" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                            <div class="accordion-body">
+                                Free resume updates for job changes, promotions, new skills, or achievements. No additional charges for 2 full years.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item fade-in">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pricing-faq4">
+                                Do you offer rush delivery?
+                            </button>
+                        </h2>
+                        <div id="pricing-faq4" class="accordion-collapse collapse" data-bs-parent="#pricingFAQ">
+                            <div class="accordion-body">
+                                Yes, we offer 24-hour rush delivery for an additional fee. Contact our support team for urgent requirements.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5" style="background: var(--gradient-primary);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="fade-in mb-4">Ready to Invest in Your Career?</h2>
+                <p class="lead fade-in mb-4">Choose the package that fits your needs and take the first step toward landing your dream job.</p>
+                <div class="fade-in">
+                    {% if current_user.is_authenticated %}
+                    <a href="#" class="btn btn-light btn-lg me-3" onclick="document.querySelector('.pricing-section').scrollIntoView();">Choose Package</a>
+                    {% else %}
+                    <a href="{{ url_for('register') }}" class="btn btn-light btn-lg me-3">Get Started</a>
+                    {% endif %}
+                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Free Consultation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block additional_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const indiaToggle = document.getElementById('indiaToggle');
+    const internationalToggle = document.getElementById('internationalToggle');
+    const indiaPrices = document.querySelectorAll('.india-price');
+    const internationalPrices = document.querySelectorAll('.international-price');
+    
+    function updatePricing() {
+        if (indiaToggle.checked) {
+            indiaPrices.forEach(price => price.style.display = 'block');
+            internationalPrices.forEach(price => price.style.display = 'none');
+        } else {
+            indiaPrices.forEach(price => price.style.display = 'none');
+            internationalPrices.forEach(price => price.style.display = 'block');
+        }
+    }
+    
+    indiaToggle.addEventListener('change', updatePricing);
+    internationalToggle.addEventListener('change', updatePricing);
+});
+</script>
+{% endblock %}

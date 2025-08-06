@@ -1,0 +1,357 @@
+{% extends "base.html" %}
+
+{% block title %}Sample Work - Professional Writers{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="min-height: 50vh;">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title">Sample Gallery</h1>
+                    <p class="hero-subtitle">See the quality and transformation in our professional work</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sample Categories -->
+<section class="py-3 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="sampleCategory" id="allSamples" checked>
+                    <label class="btn btn-outline-primary" for="allSamples">All Samples</label>
+                    
+                    <input type="radio" class="btn-check" name="sampleCategory" id="resumeSamples">
+                    <label class="btn btn-outline-primary" for="resumeSamples">Resumes</label>
+                    
+                    <input type="radio" class="btn-check" name="sampleCategory" id="linkedinSamples">
+                    <label class="btn btn-outline-primary" for="linkedinSamples">LinkedIn</label>
+                    
+                    <input type="radio" class="btn-check" name="sampleCategory" id="coverLetterSamples">
+                    <label class="btn btn-outline-primary" for="coverLetterSamples">Cover Letters</label>
+                    
+                    <input type="radio" class="btn-check" name="sampleCategory" id="sopSamples">
+                    <label class="btn btn-outline-primary" for="sopSamples">SOP/LOR</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Before/After Gallery -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Before & After Transformations</h2>
+                <p class="lead fade-in">See how we transform ordinary resumes into job-winning documents</p>
+            </div>
+        </div>
+        
+        <div class="row g-4" id="beforeAfterGallery">
+            <!-- Resume Before/After -->
+            <div class="col-lg-6 sample-item resume" data-category="resume">
+                <div class="sample-card fade-in">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0"><i class="fas fa-times-circle me-2"></i>Before - Original Resume</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="sample-preview bg-light p-4 rounded">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-file-alt" style="font-size: 3rem;"></i>
+                                    <h6 class="mt-2">Software Engineer Resume</h6>
+                                    <ul class="list-unstyled text-start mt-3 small">
+                                        <li>❌ Basic formatting</li>
+                                        <li>❌ No ATS optimization</li>
+                                        <li>❌ Generic content</li>
+                                        <li>❌ Poor keyword usage</li>
+                                        <li>❌ Outdated design</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 sample-item resume" data-category="resume">
+                <div class="sample-card fade-in">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>After - Professional Resume</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="sample-preview bg-light p-4 rounded">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-file-alt text-success" style="font-size: 3rem;"></i>
+                                    <h6 class="mt-2">Software Engineer Resume</h6>
+                                    <ul class="list-unstyled text-start mt-3 small">
+                                        <li>✅ Professional formatting</li>
+                                        <li>✅ ATS optimized</li>
+                                        <li>✅ Achievement-focused</li>
+                                        <li>✅ Industry keywords</li>
+                                        <li>✅ Modern design</li>
+                                    </ul>
+                                    <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#sampleModal" data-sample="resume">View Sample</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LinkedIn Before/After -->
+            <div class="col-lg-6 sample-item linkedin" data-category="linkedin" style="display: none;">
+                <div class="sample-card fade-in">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0"><i class="fas fa-times-circle me-2"></i>Before - Basic LinkedIn</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="sample-preview bg-light p-4 rounded">
+                                <div class="text-center text-muted">
+                                    <i class="fab fa-linkedin" style="font-size: 3rem;"></i>
+                                    <h6 class="mt-2">Marketing Professional</h6>
+                                    <ul class="list-unstyled text-start mt-3 small">
+                                        <li>❌ Generic headline</li>
+                                        <li>❌ Incomplete summary</li>
+                                        <li>❌ Poor optimization</li>
+                                        <li>❌ Limited visibility</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 sample-item linkedin" data-category="linkedin" style="display: none;">
+                <div class="sample-card fade-in">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>After - Optimized LinkedIn</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="sample-preview bg-light p-4 rounded">
+                                <div class="text-center text-muted">
+                                    <i class="fab fa-linkedin text-success" style="font-size: 3rem;"></i>
+                                    <h6 class="mt-2">Marketing Professional</h6>
+                                    <ul class="list-unstyled text-start mt-3 small">
+                                        <li>✅ Compelling headline</li>
+                                        <li>✅ Engaging summary</li>
+                                        <li>✅ SEO optimized</li>
+                                        <li>✅ Increased visibility</li>
+                                    </ul>
+                                    <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#sampleModal" data-sample="linkedin">View Sample</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sample Downloads -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Download Sample Templates</h2>
+                <p class="lead fade-in">Get watermarked samples to see our quality firsthand</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="sample-download-card fade-in">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-file-pdf text-danger" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3">IT Professional Resume</h5>
+                            <p class="text-muted">Software Engineer, 3+ years experience</p>
+                            <button class="btn btn-outline-primary" onclick="downloadSample('it-resume')">
+                                <i class="fas fa-download me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="sample-download-card fade-in">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-file-pdf text-danger" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3">Finance Professional Resume</h5>
+                            <p class="text-muted">Financial Analyst, 5+ years experience</p>
+                            <button class="btn btn-outline-primary" onclick="downloadSample('finance-resume')">
+                                <i class="fas fa-download me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="sample-download-card fade-in">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-file-pdf text-danger" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3">Marketing Cover Letter</h5>
+                            <p class="text-muted">Digital Marketing role application</p>
+                            <button class="btn btn-outline-primary" onclick="downloadSample('marketing-cover')">
+                                <i class="fas fa-download me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="sample-download-card fade-in">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-file-pdf text-danger" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3">SOP Sample</h5>
+                            <p class="text-muted">MBA application statement</p>
+                            <button class="btn btn-outline-primary" onclick="downloadSample('mba-sop')">
+                                <i class="fas fa-download me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Stories -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Client Success Metrics</h2>
+                <p class="lead fade-in">Real results from our professional services</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="metric-card text-center fade-in">
+                    <div class="metric-icon">
+                        <i class="fas fa-percentage text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h3 class="mt-3 text-success">85%</h3>
+                    <p class="text-muted">Interview Rate Increase</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="metric-card text-center fade-in">
+                    <div class="metric-icon">
+                        <i class="fas fa-clock text-primary" style="font-size: 3rem;"></i>
+                    </div>
+                    <h3 class="mt-3 text-primary">60%</h3>
+                    <p class="text-muted">Faster Job Placement</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="metric-card text-center fade-in">
+                    <div class="metric-icon">
+                        <i class="fas fa-chart-line text-warning" style="font-size: 3rem;"></i>
+                    </div>
+                    <h3 class="mt-3 text-warning">40%</h3>
+                    <p class="text-muted">Average Salary Increase</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="metric-card text-center fade-in">
+                    <div class="metric-icon">
+                        <i class="fas fa-star text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h3 class="mt-3 text-success">4.9/5</h3>
+                    <p class="text-muted">Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5" style="background: var(--gradient-primary);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="fade-in mb-4">Ready for Your Transformation?</h2>
+                <p class="lead fade-in mb-4">See how we can transform your career documents to achieve similar results.</p>
+                <div class="fade-in">
+                    <a href="{{ url_for('services') }}" class="btn btn-light btn-lg me-3">Choose Service</a>
+                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Get Free Review</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sample Modal -->
+<div class="modal fade" id="sampleModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sample Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div id="sampleContent">
+                    <!-- Sample content will be loaded here -->
+                    <p>Sample content preview would be displayed here in a real application.</p>
+                    <p class="text-muted">This is a watermarked sample for demonstration purposes.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="{{ url_for('services') }}" class="btn btn-primary">Order Similar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Category filtering
+    const categoryButtons = document.querySelectorAll('input[name="sampleCategory"]');
+    const sampleItems = document.querySelectorAll('.sample-item');
+    
+    categoryButtons.forEach(button => {
+        button.addEventListener('change', function() {
+            const category = this.id.replace('Samples', '').replace('all', '');
+            
+            sampleItems.forEach(item => {
+                if (category === '' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+
+function downloadSample(sampleType) {
+    // In a real application, this would trigger a sample download
+    alert(`Downloading ${sampleType} sample. In a real application, this would be a PDF download.`);
+}
+</script>
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Professional Writers Blog{% endblock %}
+
+{% block content %}
+<!-- Article Header -->
+<section class="py-5" style="background: var(--light-grey);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="fade-in">
+                    <div class="blog-meta mb-3">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar me-2"></i>{{ post.created_at.strftime('%B %d, %Y') }}
+                            {% if post.author %}
+                            <span class="ms-4">
+                                <i class="fas fa-user me-2"></i>{{ post.author }}
+                            </span>
+                            {% endif %}
+                        </small>
+                    </div>
+                    <h1 class="display-5 mb-4">{{ post.title }}</h1>
+                    {% if post.excerpt %}
+                    <p class="lead text-muted">{{ post.excerpt }}</p>
+                    {% endif %}
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Article Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <article class="blog-content fade-in">
+                    {% if post.featured_image %}
+                    <img src="{{ post.featured_image }}" alt="{{ post.title }}" class="img-fluid rounded mb-4">
+                    {% endif %}
+                    
+                    <div class="content">
+                        {{ post.content | safe }}
+                    </div>
+                    
+                    <!-- Share Buttons -->
+                    <div class="share-buttons mt-5 pt-4 border-top">
+                        <h5>Share this article:</h5>
+                        <div class="d-flex gap-2">
+                            <a href="#" class="btn btn-outline-primary btn-sm" onclick="shareArticle('facebook')">
+                                <i class="fab fa-facebook-f me-1"></i>Facebook
+                            </a>
+                            <a href="#" class="btn btn-outline-info btn-sm" onclick="shareArticle('twitter')">
+                                <i class="fab fa-twitter me-1"></i>Twitter
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-sm" onclick="shareArticle('linkedin')">
+                                <i class="fab fa-linkedin me-1"></i>LinkedIn
+                            </a>
+                            <a href="#" class="btn btn-outline-success btn-sm" onclick="shareArticle('whatsapp')">
+                                <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <!-- Author Bio -->
+                    <div class="widget fade-in">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0"><i class="fas fa-user me-2"></i>About the Author</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="author-avatar mb-3">
+                                    <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px; font-size: 2rem;">
+                                        {{ post.author[0] if post.author else 'PW' }}
+                                    </div>
+                                </div>
+                                <h6>{{ post.author or 'Professional Writers Team' }}</h6>
+                                <p class="text-muted small">Career expert with over 10 years of experience helping professionals land their dream jobs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Newsletter Signup -->
+                    <div class="widget fade-in">
+                        <div class="card">
+                            <div class="card-header" style="background: var(--gradient-primary);">
+                                <h5 class="mb-0 text-white"><i class="fas fa-envelope me-2"></i>Get More Tips</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Subscribe for weekly career insights and job search strategies.</p>
+                                <form action="{{ url_for('subscribe_newsletter') }}" method="POST">
+                                    <div class="mb-3">
+                                        <input type="email" name="email" class="form-control" placeholder="Your email" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Articles -->
+{% if related_posts %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2 class="fade-in">Related Articles</h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for related_post in related_posts %}
+            <div class="col-lg-4">
+                <div class="card h-100 fade-in">
+                    <div class="card-body">
+                        <h6><a href="{{ url_for('blog_post', slug=related_post.slug) }}" class="text-decoration-none">{{ related_post.title }}</a></h6>
+                        <p class="text-muted small">{{ related_post.excerpt or related_post.content[:100] + '...' }}</p>
+                        <small class="text-muted">{{ related_post.created_at.strftime('%B %d, %Y') }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action -->
+<section class="py-5" style="background: var(--gradient-primary);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="fade-in mb-4">Ready to Take Action?</h2>
+                <p class="lead fade-in mb-4">Don't just read about career success - achieve it with our professional services.</p>
+                <div class="fade-in">
+                    <a href="{{ url_for('services') }}" class="btn btn-light btn-lg me-3">Our Services</a>
+                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Free Consultation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block additional_js %}
+<script>
+function shareArticle(platform) {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    
+    let shareUrl = '';
+    
+    switch(platform) {
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${title} ${url}`;
+            break;
+    }
+    
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+}
+</script>
+{% endblock %}
