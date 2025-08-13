@@ -1,0 +1,198 @@
+/* About Us Page Styles */
+.hero-section {
+    position: relative;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.05) 0%, rgba(135, 206, 235, 0.1) 100%);
+    overflow: hidden;
+    padding: 4rem 0;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(135, 206, 235, 0.1) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite alternate;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4A90E2 0%, #87CEEB 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #556877;
+    line-height: 1.6;
+}
+
+.hero-visual {
+    position: relative;
+}
+
+.hero-icon {
+    position: relative;
+    z-index: 1;
+    margin-left: 50%;
+    color: #4A90E2;
+    animation: floatIcon 6s ease-in-out infinite;
+    font-size: 10rem;    /* For font icons */
+    margin-top: -1%;
+}
+
+/* Optional: Keep animation smooth */
+@keyframes floatIcon {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+
+.floating-shape {
+    box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.section {
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-alt {
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.03) 0%, rgba(135, 206, 235, 0.05) 100%);
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, transparent 70%);
+    top: -150px;
+    right: -150px;
+    animation: pulse 6s ease-in-out infinite alternate;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, #4A90E2 0%, #87CEEB 100%);
+    border-radius: 3px;
+}
+
+.lead {
+    font-size: 1.2rem;
+    color: #334155;
+    line-height: 1.8;
+}
+
+p {
+    color: #556877;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Call to Action Section */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: 
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite alternate;
+}
+
+.btn-light {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-light {
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}

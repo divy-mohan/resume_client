@@ -1,0 +1,361 @@
+{% extends "base.html" %}
+
+{% block title %}Infographic CV Writing Services - Professional Writers{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --infographic-primary: #6c5ce7;
+    --infographic-secondary: #a29bfe;
+    --infographic-accent: #fd79a8;
+    --infographic-gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 50%, #fd79a8 100%);
+}
+
+.infographic-hero {
+    background: var(--infographic-gradient);
+    position: relative;
+    overflow: hidden;
+}
+
+.infographic-hero::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    top: 10%;
+    right: 10%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.infographic-hero::after {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    bottom: 20%;
+    left: 15%;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+.infographic-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(108,92,231,0.15);
+    transition: all 0.4s ease;
+    border: 2px solid rgba(108,92,231,0.1);
+    position: relative;
+}
+
+.infographic-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--infographic-gradient);
+    border-radius: 20px 20px 0 0;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.infographic-card:hover::before {
+    transform: scaleX(1);
+}
+
+.infographic-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(108,92,231,0.25);
+}
+
+.infographic-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--infographic-gradient);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.infographic-card:hover .infographic-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.infographic-pricing {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 25px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 15px 35px rgba(108,92,231,0.1);
+    transition: all 0.4s ease;
+    border: 2px solid rgba(108,92,231,0.1);
+    position: relative;
+}
+
+.infographic-pricing:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(108,92,231,0.2);
+}
+
+.infographic-pricing .pricing-price {
+    color: var(--infographic-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.infographic-pricing .btn {
+    background: var(--infographic-gradient);
+    border: none;
+    border-radius: 15px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+}
+
+.infographic-wave {
+    background: var(--infographic-gradient);
+    height: 80px;
+    position: relative;
+}
+
+.infographic-wave::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+    background-size: cover;
+}
+
+.infographic-list {
+    list-style: none;
+    padding: 0;
+}
+
+.infographic-list li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.infographic-list li::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    color: var(--infographic-primary);
+    font-size: 1.2rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="infographic-hero" style="min-height: 70vh;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title text-white">Infographic CV Writing Services</h1>
+                    <p class="hero-subtitle text-white">Boost Your Hiring Potential with a Stunning Infographic CV</p>
+                    <div class="hero-buttons">
+                        <a href="#packages" class="btn btn-light btn-lg">View Packages</a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="slide-in-right">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                         alt="Infographic CV Design" class="img-fluid rounded-3 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Wave Divider -->
+<div class="infographic-wave"></div>
+
+<!-- What Is Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">What Is an Infographic CV?</h2>
+                <p class="lead fade-in">A powerful, visually engaging way to showcase why you're the perfect fit for a role</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="infographic-card fade-in text-center">
+                    <div class="infographic-icon mx-auto">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <p>An infographic CV integrates graphic design elements like colors, layouts, fonts, charts, and icons to present your professional story. It includes all essential information—work history, education, skills—in a visually compelling format that stands apart from traditional chronological resumes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Key Benefits of an Infographic CV</h2>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="infographic-card fade-in">
+                    <div class="infographic-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h5>Quick and Easy to Read</h5>
+                    <p>Recruiters can scan key info instantly thanks to clear visuals and icons.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="infographic-card fade-in">
+                    <div class="infographic-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h5>Perfect for Creative Fields</h5>
+                    <p>Adds personality and flair to your profile, reflecting your skills authentically.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="infographic-card fade-in">
+                    <div class="infographic-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h5>Highly Discoverable</h5>
+                    <p>Easily shareable on LinkedIn, personal websites, and job portals, increasing your visibility.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- When to Use Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">When to Use an Infographic CV</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="infographic-card fade-in">
+                    <p class="text-center mb-4">Consider your audience first. Infographic CVs are best suited when applying directly to recruiters or companies that value creativity and innovation.</p>
+                    <p class="text-center">They are ideal for professionals with a rich work history who want to showcase achievements dynamically—such as designers, developers, analysts, and executives.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Packages Section -->
+<section id="packages" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Infographic CV Packages</h2>
+                <p class="lead fade-in">Professional infographic designs that stand out</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="infographic-pricing fade-in">
+                    <h4>Creative</h4>
+                    <div class="pricing-price">₹6,999</div>
+                    <p class="text-muted">$90 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Professional infographic design</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Charts and visual elements</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Skills visualization</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>4 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>2 revisions included</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="infographic-pricing fade-in">
+                    <h4>Professional</h4>
+                    <div class="pricing-price">₹9,999</div>
+                    <p class="text-muted">$130 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Advanced infographic layout</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Timeline visualization</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Custom icons and graphics</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Industry-specific design</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>5 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Unlimited revisions</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="infographic-pricing fade-in">
+                    <h4>Executive</h4>
+                    <div class="pricing-price">₹14,999</div>
+                    <p class="text-muted">$195 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Premium infographic design</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Multi-page layout</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Executive branding</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Interactive elements</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>7 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Unlimited revisions</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>6 months support</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5" style="background: var(--infographic-gradient);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="fade-in mb-4">Ready to Make a Bold Impression?</h2>
+                <p class="lead fade-in mb-4">Trust Professional Writers to create an infographic CV that elevates your profile and captures recruiter attention.</p>
+                <div class="fade-in">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg me-3">Get Started</a>
+                    <a href="{% url 'samples' %}" class="btn btn-outline-light btn-lg">View Samples</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

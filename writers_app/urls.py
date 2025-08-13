@@ -2,14 +2,15 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
-app_name = 'writers_app'
+# app_name = 'writers_app'  # Removed namespace for simplicity
 
 urlpatterns = [
     # Public pages
-    path('', views.IndexView.as_view(), name='index'),
+    path('', views.IndexView.as_view(), name='home'),
     path('about/', views.AboutView.as_view(), name='about'),
     path('services/', views.ServicesView.as_view(), name='services'),
-    path('services/<slug:slug>/', views.ServiceDetailView.as_view(), name='service_detail'),
+    path('service/<slug:slug>/', views.ServiceDetailView.as_view(), name='service_detail'),
+    
     path('pricing/', views.PricingView.as_view(), name='pricing'),
     path('testimonials/', views.TestimonialsView.as_view(), name='testimonials'),
     path('blog/', views.BlogListView.as_view(), name='blog'),
@@ -20,6 +21,12 @@ urlpatterns = [
     path('privacy/', views.PrivacyView.as_view(), name='privacy'),
     path('terms/', views.TermsView.as_view(), name='terms'),
     path('refund/', views.RefundView.as_view(), name='refund'),
+    path('linkedin-service/', views.LinkedInView.as_view(), name='linkedin_service'),
+    path('visual-cv-service/', views.VisualCVView.as_view(), name='visual_cv_service'),
+    path('infographic-cv-service/', views.InfographicCVView.as_view(), name='infographic_cv_service'),
+    path('job-hunt-service/', views.JobHuntView.as_view(), name='job_hunt_service'),
+    path('sop-service/', views.SOPView.as_view(), name='sop_service'),
+    path('lor-service/', views.LORView.as_view(), name='lor_service'),
 
     # Authentication
     path('login/', views.CustomLoginView.as_view(), name='login'),

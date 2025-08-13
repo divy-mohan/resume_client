@@ -1,70 +1,116 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Our Services - Professional Writers{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/services.css' %}">
+<link rel="stylesheet" href="{% static 'css/services_enhanced.css' %}">
+<link rel="stylesheet" href="{% static 'css/wave-divider.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css">
+{% endblock %}
+
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section" style="min-height: 50vh;">
+<section class="services-hero">
     <div class="container">
         <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <div class="hero-content fade-in">
-                    <h1 class="hero-title">What We Offer</h1>
-                    <p class="hero-subtitle">Comprehensive career documentation solutions for every stage of your professional journey</p>
+                    <h1 class="hero-title">Professional Career Services</h1>
+                    <p class="hero-subtitle">Transform your career with our expert writing services. From resumes to LinkedIn profiles, we craft documents that open doors to your dream job.</p>
+                    <div class="mt-4">
+                        <a href="#services" class="btn btn-light btn-lg me-3">
+                            <i class="fas fa-rocket me-2"></i>Explore Services
+                        </a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-comments me-2"></i>Free Consultation
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Wave Divider -->
+<div class="wave-divider"></div>
+
 <!-- Services Grid -->
-<section class="services-section py-5">
+<section class="section" id="services">
     <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in" style="color: var(--services-primary); font-size: 2.5rem; font-weight: 700;">Our Expert Services</h2>
+                <p class="lead fade-in">Professional career documents that make you stand out</p>
+            </div>
+        </div>
+        
         <div class="row g-4">
             {% for service in services %}
             <div class="col-lg-4 col-md-6">
-                <div class="service-card h-100 fade-in">
-                    <div class="service-card-header">
-                        <div class="service-icon">
-                            <i class="{{ service.icon }}"></i>
+                <div class="service-card-enhanced fade-in" style="animation-delay: {% widthratio forloop.counter0 10 0.1 %}s;">
+                    <div class="p-4">
+                        <div class="service-icon-enhanced">
+                            {% if service.icon %}
+                                <i class="{{ service.icon }}"></i>
+                            {% elif 'resume' in service.name|lower %}
+                                <i class="fas fa-file-alt"></i>
+                            {% elif 'linkedin' in service.name|lower %}
+                                <i class="fab fa-linkedin"></i>
+                            {% elif 'visual' in service.name|lower %}
+                                <i class="fas fa-palette"></i>
+                            {% elif 'infographic' in service.name|lower %}
+                                <i class="fas fa-chart-bar"></i>
+                            {% elif 'cover' in service.name|lower %}
+                                <i class="fas fa-envelope"></i>
+                            {% elif 'sop' in service.name|lower %}
+                                <i class="fas fa-graduation-cap"></i>
+                            {% elif 'lor' in service.name|lower %}
+                                <i class="fas fa-award"></i>
+                            {% elif 'job' in service.name|lower %}
+                                <i class="fas fa-search"></i>
+                            {% else %}
+                                <i class="fas fa-cog"></i>
+                            {% endif %}
                         </div>
-                        <h4>{{ service.name }}</h4>
-                    </div>
-                    <div class="service-card-body">
-                        <p>{{ service.description }}</p>
+                        <h4 class="service-title-enhanced text-center">{{ service.name }}</h4>
+                        <p class="text-muted text-center mb-3">{{ service.short_description }}</p>
                         
-                        <!-- Key features -->
-                        <ul class="list-unstyled">
-                            {% if service.name == 'Resume Writing' %}
+                        <ul class="service-features">
+                            {% if 'resume' in service.name|lower %}
                             <li><i class="fas fa-check text-success me-2"></i>ATS-Optimized Format</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Industry-Specific Keywords</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Industry Keywords</li>
                             <li><i class="fas fa-check text-success me-2"></i>Professional Design</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Multiple Revisions</li>
-                            {% elif service.name == 'LinkedIn Profile Optimization' %}
+                            <li><i class="fas fa-check text-success me-2"></i>Unlimited Revisions</li>
+                            {% elif 'linkedin' in service.name|lower %}
                             <li><i class="fas fa-check text-success me-2"></i>Compelling Headline</li>
                             <li><i class="fas fa-check text-success me-2"></i>Optimized Summary</li>
                             <li><i class="fas fa-check text-success me-2"></i>Skills Enhancement</li>
                             <li><i class="fas fa-check text-success me-2"></i>SEO Optimization</li>
-                            {% elif service.name == 'Cover Letter Writing' %}
-                            <li><i class="fas fa-check text-success me-2"></i>Personalized Content</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Company Research</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Compelling Narrative</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Professional Tone</li>
-                            {% elif service.name == 'SOP/LOR Writing' %}
+                            {% elif 'visual' in service.name|lower %}
+                            <li><i class="fas fa-check text-success me-2"></i>Creative Design</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Visual Elements</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Brand Consistency</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Print Ready</li>
+                            {% elif 'sop' in service.name|lower %}
                             <li><i class="fas fa-check text-success me-2"></i>University-Specific</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Academic Excellence</li>
                             <li><i class="fas fa-check text-success me-2"></i>Personal Storytelling</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Academic Excellence</li>
                             <li><i class="fas fa-check text-success me-2"></i>Admission Success</li>
-                            {% elif service.name == 'Career Counselling' %}
-                            <li><i class="fas fa-check text-success me-2"></i>One-on-One Sessions</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Career Path Analysis</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Industry Insights</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Goal Setting</li>
+                            {% else %}
+                            <li><i class="fas fa-check text-success me-2"></i>Expert Writing</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Professional Quality</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Fast Delivery</li>
+                            <li><i class="fas fa-check text-success me-2"></i>24/7 Support</li>
                             {% endif %}
                         </ul>
                         
-                        <div class="mt-auto">
-                            <a href="{{ url_for('service_detail', service_id=service.id) }}" class="btn btn-primary w-100">Explore Service</a>
+                        <div class="text-center mt-4">
+                            <a href="{% url service.get_learn_more_url %}" class="btn btn-service-enhanced w-100">
+                                <i class="fas fa-arrow-right me-2"></i>Learn More
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -74,8 +120,11 @@
     </div>
 </section>
 
+<!-- Wave Divider -->
+<div class="wave-divider reverse"></div>
+
 <!-- Process Section -->
-<section class="py-5 bg-light">
+<section class="section section-alt">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center mb-5">
@@ -86,49 +135,41 @@
         
         <div class="row g-4">
             <div class="col-lg-3 col-md-6">
-                <div class="process-step text-center fade-in">
-                    <div class="process-icon">
-                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
-                            <span class="fs-4 fw-bold">1</span>
-                        </div>
+                <div class="process-step-enhanced fade-in">
+                    <div class="process-number">
+                        <i class="fas fa-comments"></i>
                     </div>
-                    <h5>Consultation</h5>
-                    <p>Detailed discussion about your career goals, experience, and target positions</p>
+                    <h5 style="color: var(--services-primary); font-weight: 600;">Consultation</h5>
+                    <p>One-on-one discussion about your career goals, experience, and target positions</p>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="process-step text-center fade-in">
-                    <div class="process-icon">
-                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
-                            <span class="fs-4 fw-bold">2</span>
-                        </div>
+                <div class="process-step-enhanced fade-in" style="animation-delay: 0.1s;">
+                    <div class="process-number">
+                        <i class="fas fa-search"></i>
                     </div>
-                    <h5>Research & Analysis</h5>
+                    <h5 style="color: var(--services-primary); font-weight: 600;">Research & Analysis</h5>
                     <p>Industry research, keyword analysis, and competitive intelligence gathering</p>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="process-step text-center fade-in">
-                    <div class="process-icon">
-                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
-                            <span class="fs-4 fw-bold">3</span>
-                        </div>
+                <div class="process-step-enhanced fade-in" style="animation-delay: 0.2s;">
+                    <div class="process-number">
+                        <i class="fas fa-pen-fancy"></i>
                     </div>
-                    <h5>Expert Writing</h5>
+                    <h5 style="color: var(--services-primary); font-weight: 600;">Expert Writing</h5>
                     <p>Professional writers craft your documents with precision and expertise</p>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="process-step text-center fade-in">
-                    <div class="process-icon">
-                        <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
-                            <span class="fs-4 fw-bold">4</span>
-                        </div>
+                <div class="process-step-enhanced fade-in" style="animation-delay: 0.3s;">
+                    <div class="process-number">
+                        <i class="fas fa-check-circle"></i>
                     </div>
-                    <h5>Review & Delivery</h5>
+                    <h5 style="color: var(--services-primary); font-weight: 600;">Review & Delivery</h5>
                     <p>Quality assurance, final review, and delivery with ongoing support</p>
                 </div>
             </div>
@@ -136,8 +177,11 @@
     </div>
 </section>
 
+<!-- Wave Divider -->
+<div class="wave-divider"></div>
+
 <!-- Service Comparison -->
-<section class="py-5">
+<section class="section">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center mb-5">
@@ -166,7 +210,7 @@
                                 <td class="text-center"><i class="fas fa-times text-danger fs-4"></i></td>
                             </tr>
                             <tr>
-                                <td><strong>2-Year Support Guarantee</strong></td>
+                                <td><strong>6 Months Free Support Guarantee</strong></td>
                                 <td class="text-center"><i class="fas fa-check text-success fs-4"></i></td>
                                 <td class="text-center"><i class="fas fa-times text-danger fs-4"></i></td>
                                 <td class="text-center"><i class="fas fa-times text-danger fs-4"></i></td>
@@ -211,8 +255,8 @@
                 <h2 class="fade-in mb-4">Ready to Get Started?</h2>
                 <p class="lead fade-in mb-4">Choose the service that best fits your needs and take the first step toward your dream career.</p>
                 <div class="fade-in">
-                    <a href="{{ url_for('pricing') }}" class="btn btn-light btn-lg me-3">View Pricing</a>
-                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Free Consultation</a>
+                    <a href="{% url 'pricing' %}" class="btn btn-light btn-lg me-3">View Pricing</a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Free Consultation</a>
                 </div>
             </div>
         </div>

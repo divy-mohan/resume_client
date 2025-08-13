@@ -1,357 +1,606 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Sample Work - Professional Writers{% endblock %}
+{% block title %}Resume Samples - Professional Writers{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --samples-primary: #667eea;
+    --samples-secondary: #764ba2;
+    --samples-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.samples-hero {
+    background: var(--samples-gradient);
+    padding: 4rem 0;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.samples-hero::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    top: 20%;
+    right: 10%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.filter-bar {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-top: -2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.category-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e9ecef;
+    background: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.category-btn:hover, .category-btn.active {
+    background: var(--samples-primary);
+    color: white;
+    border-color: var(--samples-primary);
+}
+
+.search-sort-bar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-box input {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+.search-box input:focus {
+    border-color: var(--samples-primary);
+    outline: none;
+}
+
+.sort-dropdown select {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    background: white;
+}
+
+.samples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.sample-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.sample-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.sample-thumbnail {
+    position: relative;
+    aspect-ratio: 210/297;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.sample-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease;
+}
+
+.sample-card:hover .sample-thumbnail img {
+    transform: scale(1.05);
+}
+
+.sample-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sample-thumbnail:hover .sample-overlay {
+    opacity: 1;
+}
+
+.sample-overlay i {
+    font-size: 3rem;
+    color: white;
+}
+
+.sample-info {
+    padding: 0.75rem;
+}
+
+.sample-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.sample-category i {
+    font-size: 0.8rem;
+}
+
+.sample-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sample-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.sample-tag {
+    padding: 0.1rem 0.35rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 0.65rem;
+    color: #666;
+}
+
+.sample-type-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 5;
+}
+
+.sample-type-before {
+    background: #dc3545;
+    color: white;
+}
+
+.sample-type-after {
+    background: #28a745;
+    color: white;
+}
+
+.sample-type-standalone {
+    background: #007bff;
+    color: white;
+}
+
+.comparison-section {
+    background: #f8f9fa;
+    padding: 3rem 0;
+    margin: 2rem 0;
+}
+
+.comparison-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.comparison-before {
+    border-left: 4px solid #dc3545;
+}
+
+.comparison-after {
+    border-left: 4px solid #28a745;
+}
+
+.modal-content {
+    border: none;
+    border-radius: 15px;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.modal-image {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.loading-spinner {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@media (max-width: 768px) {
+    .search-sort-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .samples-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section" style="min-height: 50vh;">
+<section class="samples-hero">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">
-                <div class="hero-content fade-in">
-                    <h1 class="hero-title">Sample Gallery</h1>
-                    <p class="hero-subtitle">See the quality and transformation in our professional work</p>
-                </div>
+                <h1 class="mb-3">Resume Samples Gallery</h1>
+                <p class="lead">Explore our collection of professionally crafted resumes across various industries and experience levels</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Sample Categories -->
-<section class="py-3 bg-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-auto">
-                <div class="btn-group" role="group">
-                    <input type="radio" class="btn-check" name="sampleCategory" id="allSamples" checked>
-                    <label class="btn btn-outline-primary" for="allSamples">All Samples</label>
-                    
-                    <input type="radio" class="btn-check" name="sampleCategory" id="resumeSamples">
-                    <label class="btn btn-outline-primary" for="resumeSamples">Resumes</label>
-                    
-                    <input type="radio" class="btn-check" name="sampleCategory" id="linkedinSamples">
-                    <label class="btn btn-outline-primary" for="linkedinSamples">LinkedIn</label>
-                    
-                    <input type="radio" class="btn-check" name="sampleCategory" id="coverLetterSamples">
-                    <label class="btn btn-outline-primary" for="coverLetterSamples">Cover Letters</label>
-                    
-                    <input type="radio" class="btn-check" name="sampleCategory" id="sopSamples">
-                    <label class="btn btn-outline-primary" for="sopSamples">SOP/LOR</label>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Before/After Gallery -->
-<section class="py-5">
-    <div class="container">
+<!-- Filter Bar -->
+<div class="container">
+    <div class="filter-bar">
         <div class="row">
-            <div class="col-12 text-center mb-5">
-                <h2 class="fade-in">Before & After Transformations</h2>
-                <p class="lead fade-in">See how we transform ordinary resumes into job-winning documents</p>
-            </div>
-        </div>
-        
-        <div class="row g-4" id="beforeAfterGallery">
-            <!-- Resume Before/After -->
-            <div class="col-lg-6 sample-item resume" data-category="resume">
-                <div class="sample-card fade-in">
-                    <div class="card">
-                        <div class="card-header bg-danger text-white">
-                            <h5 class="mb-0"><i class="fas fa-times-circle me-2"></i>Before - Original Resume</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="sample-preview bg-light p-4 rounded">
-                                <div class="text-center text-muted">
-                                    <i class="fas fa-file-alt" style="font-size: 3rem;"></i>
-                                    <h6 class="mt-2">Software Engineer Resume</h6>
-                                    <ul class="list-unstyled text-start mt-3 small">
-                                        <li>❌ Basic formatting</li>
-                                        <li>❌ No ATS optimization</li>
-                                        <li>❌ Generic content</li>
-                                        <li>❌ Poor keyword usage</li>
-                                        <li>❌ Outdated design</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-12">
+                <h5 class="mb-3">Filter & Search</h5>
+                
+                <!-- Category Filters -->
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all">All Categories</button>
+                    {% for category in categories %}
+                    <button class="category-btn" data-category="{{ category.slug }}" style="border-color: {{ category.color }};">
+                        <i class="{{ category.icon }}"></i> {{ category.name }}
+                    </button>
+                    {% endfor %}
+                </div>
+                
+                <!-- Search and Sort -->
+                <div class="search-sort-bar">
+                    <div class="sort-dropdown">
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            {% for category in categories %}
+                            <option value="{{ category.slug }}" style="color: {{ category.color }};">
+                                {{ category.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-6 sample-item resume" data-category="resume">
-                <div class="sample-card fade-in">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>After - Professional Resume</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="sample-preview bg-light p-4 rounded">
-                                <div class="text-center text-muted">
-                                    <i class="fas fa-file-alt text-success" style="font-size: 3rem;"></i>
-                                    <h6 class="mt-2">Software Engineer Resume</h6>
-                                    <ul class="list-unstyled text-start mt-3 small">
-                                        <li>✅ Professional formatting</li>
-                                        <li>✅ ATS optimized</li>
-                                        <li>✅ Achievement-focused</li>
-                                        <li>✅ Industry keywords</li>
-                                        <li>✅ Modern design</li>
-                                    </ul>
-                                    <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#sampleModal" data-sample="resume">View Sample</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="search-box" style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="searchInput" placeholder="Search by title..." style="flex: 1;">
+                        <button class="btn btn-primary" id="searchBtn">Search</button>
                     </div>
-                </div>
-            </div>
-            
-            <!-- LinkedIn Before/After -->
-            <div class="col-lg-6 sample-item linkedin" data-category="linkedin" style="display: none;">
-                <div class="sample-card fade-in">
-                    <div class="card">
-                        <div class="card-header bg-danger text-white">
-                            <h5 class="mb-0"><i class="fas fa-times-circle me-2"></i>Before - Basic LinkedIn</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="sample-preview bg-light p-4 rounded">
-                                <div class="text-center text-muted">
-                                    <i class="fab fa-linkedin" style="font-size: 3rem;"></i>
-                                    <h6 class="mt-2">Marketing Professional</h6>
-                                    <ul class="list-unstyled text-start mt-3 small">
-                                        <li>❌ Generic headline</li>
-                                        <li>❌ Incomplete summary</li>
-                                        <li>❌ Poor optimization</li>
-                                        <li>❌ Limited visibility</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="sort-dropdown">
+                        <select id="sortSelect">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="title">Title A-Z</option>
+                        </select>
                     </div>
+                    <button class="btn btn-outline-primary" id="resetFilters">Reset</button>
                 </div>
-            </div>
-            
-            <div class="col-lg-6 sample-item linkedin" data-category="linkedin" style="display: none;">
-                <div class="sample-card fade-in">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>After - Optimized LinkedIn</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="sample-preview bg-light p-4 rounded">
-                                <div class="text-center text-muted">
-                                    <i class="fab fa-linkedin text-success" style="font-size: 3rem;"></i>
-                                    <h6 class="mt-2">Marketing Professional</h6>
-                                    <ul class="list-unstyled text-start mt-3 small">
-                                        <li>✅ Compelling headline</li>
-                                        <li>✅ Engaging summary</li>
-                                        <li>✅ SEO optimized</li>
-                                        <li>✅ Increased visibility</li>
-                                    </ul>
-                                    <button class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#sampleModal" data-sample="linkedin">View Sample</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Sample Downloads -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center mb-5">
-                <h2 class="fade-in">Download Sample Templates</h2>
-                <p class="lead fade-in">Get watermarked samples to see our quality firsthand</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-lg-3 col-md-6">
-                <div class="sample-download-card fade-in">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-file-pdf text-danger" style="font-size: 3rem;"></i>
-                            <h5 class="mt-3">IT Professional Resume</h5>
-                            <p class="text-muted">Software Engineer, 3+ years experience</p>
-                            <button class="btn btn-outline-primary" onclick="downloadSample('it-resume')">
-                                <i class="fas fa-download me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <div class="sample-download-card fade-in">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-file-pdf text-danger" style="font-size: 3rem;"></i>
-                            <h5 class="mt-3">Finance Professional Resume</h5>
-                            <p class="text-muted">Financial Analyst, 5+ years experience</p>
-                            <button class="btn btn-outline-primary" onclick="downloadSample('finance-resume')">
-                                <i class="fas fa-download me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <div class="sample-download-card fade-in">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-file-pdf text-danger" style="font-size: 3rem;"></i>
-                            <h5 class="mt-3">Marketing Cover Letter</h5>
-                            <p class="text-muted">Digital Marketing role application</p>
-                            <button class="btn btn-outline-primary" onclick="downloadSample('marketing-cover')">
-                                <i class="fas fa-download me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <div class="sample-download-card fade-in">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-file-pdf text-danger" style="font-size: 3rem;"></i>
-                            <h5 class="mt-3">SOP Sample</h5>
-                            <p class="text-muted">MBA application statement</p>
-                            <button class="btn btn-outline-primary" onclick="downloadSample('mba-sop')">
-                                <i class="fas fa-download me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Success Stories -->
-<section class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center mb-5">
-                <h2 class="fade-in">Client Success Metrics</h2>
-                <p class="lead fade-in">Real results from our professional services</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-lg-3 col-md-6">
-                <div class="metric-card text-center fade-in">
-                    <div class="metric-icon">
-                        <i class="fas fa-percentage text-success" style="font-size: 3rem;"></i>
-                    </div>
-                    <h3 class="mt-3 text-success">85%</h3>
-                    <p class="text-muted">Interview Rate Increase</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <div class="metric-card text-center fade-in">
-                    <div class="metric-icon">
-                        <i class="fas fa-clock text-primary" style="font-size: 3rem;"></i>
-                    </div>
-                    <h3 class="mt-3 text-primary">60%</h3>
-                    <p class="text-muted">Faster Job Placement</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <div class="metric-card text-center fade-in">
-                    <div class="metric-icon">
-                        <i class="fas fa-chart-line text-warning" style="font-size: 3rem;"></i>
-                    </div>
-                    <h3 class="mt-3 text-warning">40%</h3>
-                    <p class="text-muted">Average Salary Increase</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <div class="metric-card text-center fade-in">
-                    <div class="metric-icon">
-                        <i class="fas fa-star text-success" style="font-size: 3rem;"></i>
-                    </div>
-                    <h3 class="mt-3 text-success">4.9/5</h3>
-                    <p class="text-muted">Client Satisfaction</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Call to Action -->
-<section class="py-5" style="background: var(--gradient-primary);">
-    <div class="container">
-        <div class="row justify-content-center text-center text-white">
-            <div class="col-lg-8">
-                <h2 class="fade-in mb-4">Ready for Your Transformation?</h2>
-                <p class="lead fade-in mb-4">See how we can transform your career documents to achieve similar results.</p>
-                <div class="fade-in">
-                    <a href="{{ url_for('services') }}" class="btn btn-light btn-lg me-3">Choose Service</a>
-                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Get Free Review</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Sample Modal -->
-<div class="modal fade" id="sampleModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Sample Preview</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body text-center">
-                <div id="sampleContent">
-                    <!-- Sample content will be loaded here -->
-                    <p>Sample content preview would be displayed here in a real application.</p>
-                    <p class="text-muted">This is a watermarked sample for demonstration purposes.</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="{{ url_for('services') }}" class="btn btn-primary">Order Similar</a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Before/After Comparison Section -->
+{% if featured_samples %}
+<section class="comparison-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2>Before & After Transformations</h2>
+                <p class="lead">See the dramatic difference our professional writing makes</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="comparison-card comparison-before">
+                    <h4 class="text-danger mb-3">❌ Before - Original Resume</h4>
+                    <ul class="list-unstyled">
+                        <li>• Basic formatting</li>
+                        <li>• No ATS optimization</li>
+                        <li>• Generic content</li>
+                        <li>• Poor keyword usage</li>
+                        <li>• Outdated design</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="comparison-card comparison-after">
+                    <h4 class="text-success mb-3">✅ After - Professional Resume</h4>
+                    <ul class="list-unstyled">
+                        <li>• Professional formatting</li>
+                        <li>• ATS optimized</li>
+                        <li>• Achievement-focused</li>
+                        <li>• Industry keywords</li>
+                        <li>• Modern design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Samples by Category -->
+<div class="container">
+    {% for category, samples in samples_by_category.items %}
+    {% if samples %}
+    <section class="category-section mb-5">
+        <div class="category-header mb-4">
+            <h3 class="category-title" style="color: {{ category.color }};">
+                <i class="{{ category.icon }} me-2"></i>{{ category.name }}
+            </h3>
+            {% if category.description %}
+            <p class="category-description text-muted">{{ category.description }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="samples-grid">
+            {% for sample in samples %}
+            <div class="sample-card fade-in-up" 
+                 data-category="{{ category.slug }}" 
+                 data-title="{{ sample.title|lower }}"
+                 data-date="{{ sample.created_at|date:'Y-m-d' }}"
+                 data-views="{{ sample.view_count }}">
+                {% if sample.sample_type != 'standalone' %}
+                <div class="sample-type-badge sample-type-{{ sample.sample_type }}">
+                    {{ sample.get_sample_type_display }}
+                </div>
+                {% endif %}
+                
+                <div class="sample-thumbnail" onclick="openModal('{{ sample.image.url }}', '{{ sample.title }}')">
+                    <img src="{{ sample.image.url }}" alt="{{ sample.title }}" loading="lazy" style="aspect-ratio: 210/297; object-fit: cover;">
+                    <div class="sample-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                
+                <div class="sample-info">
+                    <div class="sample-category" style="background-color: {{ category.color }}20; color: {{ category.color }};">
+                        <i class="{{ category.icon }}"></i> {{ category.name }}
+                    </div>
+                    <h5 class="sample-title">{{ sample.title }}</h5>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    {% empty %}
+    <div class="no-results text-center py-5">
+        <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+        <h4>No samples available</h4>
+        <p>Check back soon for new resume samples!</p>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Resume Sample</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" class="modal-image" src="" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<section class="py-5" style="background: var(--samples-gradient);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Ready to Get Your Professional Resume?</h2>
+                <p class="lead mb-4">Join thousands of professionals who have transformed their careers with our expert resume writing services.</p>
+                <div>
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg me-3">Get Started</a>
+                    <a href="{% url 'services' %}" class="btn btn-outline-light btn-lg">View Services</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
 
 {% block additional_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Category filtering
-    const categoryButtons = document.querySelectorAll('input[name="sampleCategory"]');
-    const sampleItems = document.querySelectorAll('.sample-item');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const sortSelect = document.getElementById('sortSelect');
+    const resetBtn = document.getElementById('resetFilters');
+    const categorySections = document.querySelectorAll('.category-section');
     
-    categoryButtons.forEach(button => {
-        button.addEventListener('change', function() {
-            const category = this.id.replace('Samples', '').replace('all', '');
-            
-            sampleItems.forEach(item => {
-                if (category === '' || item.dataset.category === category) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+    // Category button filter
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            categoryFilter.value = this.dataset.category;
+            filterSamples();
         });
     });
+    
+    // Category dropdown filter
+    categoryFilter.addEventListener('change', function() {
+        const selectedCategory = this.value;
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        const matchingBtn = document.querySelector(`.category-btn[data-category="${selectedCategory}"]`);
+        if (matchingBtn) matchingBtn.classList.add('active');
+        filterSamples();
+    });
+    
+    // Search button
+    searchBtn.addEventListener('click', filterSamples);
+    
+    // Search on Enter key
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            filterSamples();
+        }
+    });
+    
+    // Sort
+    sortSelect.addEventListener('change', filterSamples);
+    
+    // Reset filters
+    resetBtn.addEventListener('click', function() {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        categoryBtns[0].classList.add('active');
+        categoryFilter.value = 'all';
+        searchInput.value = '';
+        sortSelect.value = 'newest';
+        filterSamples();
+    });
+    
+    function filterSamples() {
+        const selectedCategory = categoryFilter.value;
+        const searchTerm = searchInput.value.toLowerCase();
+        const sortBy = sortSelect.value;
+        
+        categorySections.forEach(section => {
+            const sampleCards = Array.from(section.querySelectorAll('.sample-card'));
+            let visibleCards = [];
+            
+            // Filter cards
+            sampleCards.forEach(card => {
+                const cardCategory = card.dataset.category;
+                const cardTitle = card.dataset.title;
+                
+                const categoryMatch = selectedCategory === 'all' || cardCategory === selectedCategory;
+                const searchMatch = searchTerm === '' || cardTitle.includes(searchTerm);
+                
+                if (categoryMatch && searchMatch) {
+                    visibleCards.push(card);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Sort visible cards
+            visibleCards.sort((a, b) => {
+                switch(sortBy) {
+                    case 'oldest':
+                        return new Date(a.dataset.date) - new Date(b.dataset.date);
+                    case 'popular':
+                        return parseInt(b.dataset.views) - parseInt(a.dataset.views);
+                    case 'title':
+                        return a.dataset.title.localeCompare(b.dataset.title);
+                    default: // newest
+                        return new Date(b.dataset.date) - new Date(a.dataset.date);
+                }
+            });
+            
+            // Show sorted cards
+            const samplesGrid = section.querySelector('.samples-grid');
+            visibleCards.forEach(card => {
+                card.style.display = 'block';
+                samplesGrid.appendChild(card);
+            });
+            
+            // Show/hide entire section
+            section.style.display = visibleCards.length > 0 ? 'block' : 'none';
+        });
+    }
+    
 });
 
-function downloadSample(sampleType) {
-    // In a real application, this would trigger a sample download
-    alert(`Downloading ${sampleType} sample. In a real application, this would be a PDF download.`);
+function openModal(imageUrl, title) {
+    document.getElementById('modalImage').src = imageUrl;
+    document.getElementById('modalTitle').textContent = title;
+    new bootstrap.Modal(document.getElementById('imageModal')).show();
 }
 </script>
 {% endblock %}

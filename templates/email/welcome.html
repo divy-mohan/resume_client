@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Professional Writers</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); padding: 20px; text-align: center; }
+        .header h1 { color: white; margin: 0; }
+        .content { padding: 20px; }
+        .features { list-style: none; padding: 0; }
+        .features li { padding: 5px 0; }
+        .cta { text-align: center; margin: 30px 0; }
+        .cta a { background: #2a5298; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; }
+        .footer { background: #f8f9fa; padding: 20px; text-align: center; margin-top: 20px; }
+        .footer p { margin: 0; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to Professional Writers!</h1>
+        </div>
+        <div class="content">
+            <h2>Hello {{ user.get_full_name }}!</h2>
+            <p>Thank you for joining Professional Writers. We're excited to help you achieve your career goals.</p>
+            <p>Here's what you can expect from us:</p>
+            <ul class="features">
+                <li>🎓 IIT/IIM Alumni Writers</li>
+                <li>🌍 Global Resume Standards</li>
+                <li>🧠 AI + Human Expertise</li>
+                <li>📞 24x7 Client Support</li>
+            </ul>
+            <p>Ready to get started? Browse our services and find the perfect package for your needs.</p>
+            <div class="cta">
+                <a href="{{ site_url }}/services/">Explore Services</a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Professional Writers - Your Career Success Partner</p>
+        </div>
+    </div>
+</body>
+</html>

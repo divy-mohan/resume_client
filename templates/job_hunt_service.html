@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+
+{% block title %}Job Hunt Services - Professional Writers{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --job-primary: #00b894;
+    --job-secondary: #00cec9;
+    --job-accent: #55efc4;
+    --job-gradient: linear-gradient(135deg, #00b894 0%, #00cec9 50%, #55efc4 100%);
+}
+
+.job-hero {
+    background: var(--job-gradient);
+    position: relative;
+    overflow: hidden;
+}
+
+.job-hero::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    top: -50px;
+    right: -50px;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 0.3; }
+}
+
+.job-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f0fffe 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,184,148,0.15);
+    transition: all 0.4s ease;
+    border: 2px solid rgba(0,184,148,0.1);
+    position: relative;
+}
+
+.job-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--job-gradient);
+    border-radius: 20px 20px 0 0;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.job-card:hover::before {
+    transform: scaleX(1);
+}
+
+.job-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,184,148,0.25);
+}
+
+.job-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--job-gradient);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.job-card:hover .job-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.job-pricing {
+    background: linear-gradient(145deg, #ffffff 0%, #f0fffe 100%);
+    border-radius: 25px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 15px 35px rgba(0,184,148,0.1);
+    transition: all 0.4s ease;
+    border: 2px solid rgba(0,184,148,0.1);
+}
+
+.job-pricing:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0,184,148,0.2);
+}
+
+.job-pricing .pricing-price {
+    color: var(--job-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.job-pricing .btn {
+    background: var(--job-gradient);
+    border: none;
+    border-radius: 15px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+}
+
+.job-list {
+    list-style: none;
+    padding: 0;
+}
+
+.job-list li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.job-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--job-primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="job-hero" style="min-height: 70vh;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title text-white">Job Hunt Services</h1>
+                    <p class="hero-subtitle text-white">Your Shortcut to the Perfect Job</p>
+                    <div class="hero-buttons">
+                        <a href="#packages" class="btn btn-light btn-lg">View Packages</a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="slide-in-right">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                         alt="Job Search" class="img-fluid rounded-3 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Save Time, Find the Right Job — Effortlessly</h2>
+                <p class="lead fade-in">In today's fast-paced world, searching for the perfect job can be overwhelming and time-consuming.</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="job-card fade-in text-center">
+                    <div class="job-icon mx-auto">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h5>How Our Job Search Service Works</h5>
+                    <p>Simply share your industry, experience, and preferred role with us. Our expert consultants, continuously connected with employers and registered on multiple job portals, handpick job openings tailored to your profile and career aspirations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Section -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Why Choose Our Job Search Service?</h2>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="job-card fade-in">
+                    <div class="job-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h5>Save Valuable Time</h5>
+                    <p>We do the legwork by scouring multiple job portals for you.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="job-card fade-in">
+                    <div class="job-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h5>Relevant Matches Only</h5>
+                    <p>Receive openings aligned with your target industry, role, and salary expectations.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="job-card fade-in">
+                    <div class="job-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h5>Wide Geographic Coverage</h5>
+                    <p>Services available across Chennai, Delhi NCR, Mumbai, Noida, Gurgaon, Pune, Bangalore, Hyderabad, Kolkata, and more.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="job-card fade-in">
+                    <div class="job-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h5>Trusted by Job Seekers</h5>
+                    <p>Hundreds of satisfied clients have successfully landed their dream roles with our support.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Packages Section -->
+<section id="packages" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Job Hunt Packages</h2>
+                <p class="lead fade-in">Find your perfect job with our tailored search services</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="job-pricing fade-in">
+                    <h4>Basic Hunt</h4>
+                    <div class="pricing-price">₹1,999</div>
+                    <p class="text-muted">$25 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Job search for 1 week</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Up to 10 relevant openings</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Basic profile matching</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Email delivery</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="job-pricing fade-in">
+                    <h4>Professional Hunt</h4>
+                    <div class="pricing-price">₹3,999</div>
+                    <p class="text-muted">$50 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Job search for 2 weeks</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Up to 25 relevant openings</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Advanced profile matching</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Salary negotiation tips</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Interview preparation guide</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="job-pricing fade-in">
+                    <h4>Executive Hunt</h4>
+                    <div class="pricing-price">₹6,999</div>
+                    <p class="text-muted">$90 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Job search for 1 month</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Unlimited relevant openings</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Premium profile matching</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Personal career consultant</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Interview coaching session</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Follow-up support</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5" style="background: var(--job-gradient);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="fade-in mb-4">Your Career Partner Across Cities and Industries</h2>
+                <p class="lead fade-in mb-4">Whether you're in a metro city or emerging market, our comprehensive network and hands-on approach ensure you never miss the right opportunity.</p>
+                <div class="fade-in">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg me-3">Start Job Hunt</a>
+                    <a href="{% url 'samples' %}" class="btn btn-outline-light btn-lg">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

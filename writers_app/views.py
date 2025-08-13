@@ -29,6 +29,7 @@ class IndexView(TemplateView):
         context['testimonials'] = Testimonial.objects.filter(is_featured=True, is_approved=True)[:6]
         context['blog_posts'] = BlogPost.objects.filter(is_published=True)[:3]
         context['services'] = Service.objects.filter(is_active=True)[:6]
+        context['featured_samples'] = ResumeSample.objects.filter(is_featured=True, is_active=True)[:6]
         return context
 
 
@@ -49,11 +50,14 @@ class ServiceDetailView(DetailView):
     model = Service
     template_name = 'service_detail.html'
     context_object_name = 'service'
-    slug_field = 'slug'
+    
+    def get_queryset(self):
+        return Service.objects.filter(is_active=True)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['packages'] = self.object.packages.filter(is_active=True).order_by('order', 'price_inr')
+        context['packages'] = self.object.packages.filter(is_active=True).order_by('display_order')
+        context['testimonials'] = Testimonial.objects.filter(is_approved=True, is_featured=True)[:3]
         return context
 
 
@@ -115,12 +119,43 @@ class ContactView(CreateView):
     success_url = '/contact/'
     
     def form_valid(self, form):
-        messages.success(self.request, 'Thank you for your message! We\'ll get back to you soon.')
-        return super().form_valid(form)
+        # Save the form
+        response = super().form_valid(form)
+        
+        # Send notification email
+        from .utils import send_email
+        send_email(
+            subject=f"New Contact Form Submission - {form.cleaned_data.get('service', 'General')}",
+            recipients=[settings.DEFAULT_FROM_EMAIL],
+            template=None,  # Use default template
+            name=form.cleaned_data['name'],
+            email=form.cleaned_data['email'],
+            phone=form.cleaned_data.get('phone', ''),
+            service=form.cleaned_data.get('service', ''),
+            contact_subject=form.cleaned_data['subject'],
+            message=form.cleaned_data['message']
+        )
+        
+        messages.success(self.request, 'Thank you for your message! We will get back to you within 24 hours.')
+        return response
 
 
 class SamplesView(TemplateView):
     template_name = 'samples.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = SampleCategory.objects.filter(is_active=True).order_by('order')
+        samples_by_category = {}
+        
+        for category in categories:
+            samples_by_category[category] = ResumeSample.objects.filter(
+                category=category, is_active=True
+            ).order_by('-is_featured', '-created_at')
+        
+        context['samples_by_category'] = samples_by_category
+        context['categories'] = categories
+        return context
 
 
 class PrivacyView(TemplateView):
@@ -133,6 +168,30 @@ class TermsView(TemplateView):
 
 class RefundView(TemplateView):
     template_name = 'refund.html'
+
+
+class LinkedInView(TemplateView):
+    template_name = 'linkedin_service.html'
+
+
+class VisualCVView(TemplateView):
+    template_name = 'visual_cv_service.html'
+
+
+class InfographicCVView(TemplateView):
+    template_name = 'infographic_cv_service.html'
+
+
+class JobHuntView(TemplateView):
+    template_name = 'job_hunt_service.html'
+
+
+class SOPView(TemplateView):
+    template_name = 'sop_service.html'
+
+
+class LORView(TemplateView):
+    template_name = 'lor_service.html'
 
 
 # Authentication Views
@@ -151,6 +210,11 @@ class RegisterView(CreateView):
     
     def form_valid(self, form):
         user = form.save()
+        
+        # Send welcome email
+        from .utils import send_welcome_email
+        send_welcome_email(user)
+        
         login(self.request, user)
         messages.success(self.request, 'Welcome! Your account has been created successfully.')
         return super().form_valid(form)
@@ -214,9 +278,11 @@ class PaymentView(LoginRequiredMixin, TemplateView):
         
         # Create Razorpay order
         if context['order'].payment_status == 'pending':
+            from .utils import create_razorpay_order
             razorpay_order = create_razorpay_order(context['order'])
-            context['razorpay_order'] = razorpay_order
-            context['razorpay_key'] = settings.RAZORPAY_KEY_ID
+            if razorpay_order:
+                context['razorpay_order'] = razorpay_order
+                context['razorpay_key'] = settings.RAZORPAY_KEY_ID
         
         return context
 
@@ -302,11 +368,15 @@ def verify_razorpay_payment(request):
             order = get_object_or_404(Order, id=order_id, user=request.user)
             
             # Verify payment signature
+            from .utils import verify_payment_signature, send_order_confirmation
             if verify_payment_signature(payment_id, order.order_number, signature):
                 order.payment_status = 'paid'
                 order.payment_id = payment_id
                 order.status = 'confirmed'
                 order.save()
+                
+                # Send order confirmation email
+                send_order_confirmation(order)
                 
                 return JsonResponse({'success': True, 'redirect': f'/order/{order.id}/success/'})
             else:

@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}LinkedIn Profile Writing Services - Professional Writers{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/linkedin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/wave-divider.css' %}">
+{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="morph-background">
+        <div class="morph-shape"></div>
+        <div class="morph-shape"></div>
+    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <div class="fade-in" style="animation-delay: 0.2s;">
+                        <h1 class="hero-title">LinkedIn Profile Writing Services</h1>
+                    </div>
+                    <div class="fade-in" style="animation-delay: 0.4s;">
+                        <p class="hero-subtitle">Elevate Your Career with Professional LinkedIn Profile Writing Services</p>
+                    </div>
+                    <div class="hero-buttons fade-in" style="animation-delay: 0.6s;">
+                        <a href="#packages" class="btn btn-primary btn-lg">
+                            <i class="fas fa-chart-line me-2"></i>View Packages
+                        </a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-rocket me-2"></i>Get Started
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="slide-in-right" style="animation-delay: 0.8s;">
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                         alt="LinkedIn Profile Optimization" class="img-fluid rounded-3 shadow-lg">
+                    <div class="floating-shapes">
+                        <div class="floating-icon" style="--delay: 0s;"><i class="fab fa-linkedin"></i></div>
+                        <div class="floating-icon" style="--delay: 2s;"><i class="fas fa-user-tie"></i></div>
+                        <div class="floating-icon" style="--delay: 4s;"><i class="fas fa-chart-line"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Wave Divider -->
+<div class="wave-divider"></div>
+
+<!-- Why LinkedIn Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Why You Need Professional LinkedIn Profile Writing</h2>
+                <p class="lead fade-in">In today's digital world, social networking sites have become indispensable tools for marketing, communication, and recruitment.</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h5>Premier Professional Network</h5>
+                    <p>LinkedIn stands out as the premier professional network—bridging job seekers, recruiters, and consultants on a global scale.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h5>Recruiter Visibility</h5>
+                    <p>A well-crafted LinkedIn profile makes it easy for recruiters to find and contact you with instant access to references and recommendations.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h5>Career Growth Tool</h5>
+                    <p>Your profile becomes a powerful tool in your job search and career growth, showcasing your skills, endorsements, and network strength.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Wave Divider -->
+<div class="wave-divider reverse"></div>
+
+<!-- Our Services Section -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">How Professional Writers Amplifies Your LinkedIn Presence</h2>
+                <p class="lead fade-in">We specialize in crafting LinkedIn profiles that build your personal brand and enhance your professional reputation.</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-6 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h5>Personal Brand Building</h5>
+                    <p>Our comprehensive services include profile writing, makeover, development, and editing—helping you engage effectively with HR professionals, recruiters, and industry leaders worldwide.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h5>Global Reach</h5>
+                    <p>Serving clients across India, the USA, UK, UAE, Australia, and beyond, our expert team ensures your profile is optimized with the right keywords and industry-specific language.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h5>Market Research & Analysis</h5>
+                    <p>Our writers and editors conduct thorough market research, competition analysis, and keyword optimization tailored to your career goals.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 col-md-6">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h5>Expert Team</h5>
+                    <p>Our writers and editors, located in major cities like Delhi, Mumbai, Bangalore, and Hyderabad, bring local market expertise to your profile.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Wave Divider -->
+<div class="wave-divider"></div>
+
+<!-- What to Expect Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">What to Expect</h2>
+                <p class="lead fade-in">Choose a package that matches your experience level and career aspirations.</p>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="feature-card fade-in text-center">
+                    <div class="feature-icon mx-auto">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h5>Dedicated LinkedIn Profile Writers</h5>
+                    <p>Our dedicated LinkedIn profile writers invest quality time understanding your background and objectives. We provide unlimited revisions until your profile perfectly reflects your professional brand and attracts the attention you deserve.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Packages Section -->
+<section id="packages" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">LinkedIn Profile Writing Packages</h2>
+                <p class="lead fade-in">Professional packages designed for different career levels</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card fade-in">
+                    <h4>Starter</h4>
+                    <div class="pricing-price">₹2,999</div>
+                    <p class="text-muted">$39 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Professional headline optimization</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Summary section rewrite</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Skills section enhancement</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>2 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>2 revisions included</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card featured fade-in">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h4>Professional</h4>
+                    <div class="pricing-price">₹4,999</div>
+                    <p class="text-muted">$65 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Complete profile makeover</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Keyword optimization</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Experience section enhancement</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Industry-specific content</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>3 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Unlimited revisions</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card fade-in">
+                    <h4>Executive</h4>
+                    <div class="pricing-price">₹7,999</div>
+                    <p class="text-muted">$105 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Premium profile transformation</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Personal branding strategy</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Leadership positioning</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Network growth guidance</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>5 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Unlimited revisions</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>1-year support</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5" style="background: var(--gradient-primary);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="fade-in mb-4">Transform Your LinkedIn Profile Today</h2>
+                <p class="lead fade-in mb-4">Partner with Professional Writers to transform your LinkedIn profile into a compelling, recruiter-attracting asset that drives career success.</p>
+                <div class="fade-in">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg me-3">Get Started</a>
+                    <a href="{% url 'samples' %}" class="btn btn-outline-light btn-lg">View Samples</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

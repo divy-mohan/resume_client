@@ -8,6 +8,33 @@ from .models import Order, ContactMessage, NewsletterSubscriber, ChatMessage
 User = get_user_model()
 
 
+class ContactForm(forms.ModelForm):
+    SERVICE_CHOICES = [
+        ('resume-writing', 'Resume Writing'),
+        ('linkedin-profile', 'LinkedIn Profile Optimization'),
+        ('cover-letter', 'Cover Letter Writing'),
+        ('sop-lor', 'SOP/LOR Writing'),
+        ('career-counselling', 'Career Counselling'),
+        ('other', 'Other')
+    ]
+    
+    service = forms.ChoiceField(choices=SERVICE_CHOICES, required=False)
+    phone = forms.CharField(max_length=20, required=False)
+
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'email', 'phone', 'service', 'subject', 'message']
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Please describe your requirements...'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Send Message'))
+
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(max_length=30, required=True)
@@ -36,19 +63,16 @@ class CustomAuthenticationForm(AuthenticationForm):
         self.helper.add_input(Submit('submit', 'Log In'))
 
 
-class ContactForm(forms.ModelForm):
-    class Meta:
-        model = ContactMessage
-        fields = ['name', 'email', 'subject', 'message']
-        widgets = {
-            'message': forms.Textarea(attrs={'rows': 5}),
-        }
+class BlogCommentForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    comment = forms.CharField(widget=forms.Textarea(attrs={'rows': 4}), max_length=1000)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Send Message'))
+        self.helper.add_input(Submit('submit', 'Post Comment'))
 
 
 class NewsletterForm(forms.ModelForm):

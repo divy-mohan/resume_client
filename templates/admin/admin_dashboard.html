@@ -590,7 +590,7 @@ function loadRecentOrders() {
             <td>#${order.id}</td>
             <td>${order.client}</td>
             <td>${order.service}</td>
-            <td><span class="order-status status-${order.status.replace('_', '-')}">${order.status.replace('_', ' ')}</span></td>
+            <td><span class="order-status status-${order.status.replace('_', '- %}">${order.status.replace('_', '  %}</span></td>
             <td>${order.amount}</td>
             <td>
                 <button class="btn btn-sm btn-outline-primary" onclick="viewOrderDetails('${order.id}')">
@@ -663,7 +663,7 @@ function loadWritersGrid() {
                 <div class="text-center mb-3">
                     <div class="writer-avatar mb-2">
                         <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto" style="width: 60px; height: 60px;">
-                            ${writer.name.split(' ').map(n => n.charAt(0)).join('')}
+                            ${writer.name.split(' ').map(n => n.charAt(0)).join(' %}
                         </div>
                     </div>
                     <h6>${writer.name}</h6>

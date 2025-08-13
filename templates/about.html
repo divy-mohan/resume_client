@@ -1,10 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}About Us - Professional Writers{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/about_us.css' %}">  
+    <link rel="stylesheet" href="{% static 'css/wave-divider.css' %}">  
+{% endblock %}
 
 {% block content %}
 <!-- Hero Banner -->
-<section class="hero-section" style="min-height: 60vh;">
+<section class="hero-section">
     <div class="container">
         <div class="row align-items-center h-100">
             <div class="col-lg-6">
@@ -15,258 +20,138 @@
             </div>
             <div class="col-lg-6">
                 <div class="slide-in-right">
-                    <img src="https://pixabay.com/get/geba2fe2ce961f431c9cfda48f5620ca8c525985151b73c1875b4b4c24f572ee00a46b593963bc9f772162e4174472a1ce1a47612290138686f21aff47c9084e1_1280.jpg" 
-                         alt="Professional workspace" 
-                         class="img-fluid rounded-3 shadow-lg">
+                    <div class="hero-visual text-center">
+                        <div class="floating-shape"></div>
+                        <div class="floating-shape" style="width: 100px; height: 100px; top: 60%; left: 20%; animation-delay: -2s;"></div>
+                        <div class="floating-shape" style="width: 70px; height: 70px; top: 30%; left: 70%; animation-delay: -4s;"></div>
+                        <div class="hero-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Our Story -->
-<section class="py-5">
+<!-- Wave Divider -->
+<div class="wave-divider"></div>
+
+<!-- About Professional Writers -->
+<section class="section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="text-center mb-5">
-                    <h2 class="fade-in">Our Story</h2>
+                    <h2 class="section-title fade-in">About Professional Writers</h2>
+                </div>
+                
+                <div class="content-box fade-in">
+                    <p class="lead">
+                        <i class="fas fa-star text-primary me-2"></i>
+                        Professional Writers, headquartered in Noida, is a trusted leader in professional resume writing with over 7 years of dedicated service. 
+                    </p>
+                    
+                    <p class="lead">
+                        <i class="fas fa-check-circle text-primary me-2"></i>
+                        We specialize in crafting powerful, keyword-rich CVs that capture your strengths and align perfectly with what HR professionals and applicant tracking systems (ATS) demand. 
+                    </p>
+                    
+                    <p class="lead">
+                        <i class="fas fa-globe text-primary me-2"></i>
+                        Our services extend across India, the USA, the UK, the UAE, and other global markets, empowering candidates worldwide to land their dream roles.
+                    </p>
+                    
+                    <p>
+                        <i class="fas fa-lightbulb text-primary me-2"></i>
+                        Our expert team invests significant time researching your industry, competition, and key skills before designing a resume tailored to your unique career journey. 
+                        With decades of collective experience and thousands of successful resumes crafted, we understand how to highlight your true potential and make your profile stand out.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Wave Divider -->
+<div class="wave-divider reverse"></div>
+
+<!-- Why Choose Us -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <h2 class="fade-in">Why Choose Professional Writers?</h2>
                 </div>
                 
                 <div class="fade-in">
-                    <p class="lead">Professional Writers was founded with a simple yet powerful vision: to bridge the gap between talented professionals and their dream careers through expertly crafted career documents.</p>
-                    
-                    <p>In today's competitive job market, having the right skills isn't enough. You need to present those skills in a way that captures attention, tells your story compellingly, and demonstrates your value to potential employers. That's where we come in.</p>
-                    
-                    <p>Our journey began when our founders, graduates from prestigious institutions like IIT and IIM, recognized a common challenge among their peers and colleagues. Despite having exceptional qualifications and experience, many were struggling to secure interviews and land their desired positions. The problem wasn't their capabilities—it was how they were presenting themselves on paper.</p>
-                    
-                    <p>This realization led to the creation of Professional Writers, a company dedicated to helping professionals across India and internationally showcase their best selves through professionally written resumes, LinkedIn profiles, cover letters, and other career documents.</p>
+                    <p>
+                        Your resume is your first impression—and our professional writers know how to make it unforgettable. 
+                        We don’t just write resumes; we uncover your hidden talents and present them in a compelling, impactful way.
+                    </p>
+                    <p>
+                        Our process is highly personalized: we spend quality one-on-one time with you via phone or Skype (20–60 minutes) to understand your goals and expectations fully. 
+                        Within 2–4 days, you receive a draft tailored just for you, and we offer unlimited revisions until you’re completely satisfied.
+                    </p>
+                    <p>
+                        To support your career journey beyond the resume, we provide 6 months of free post-delivery assistance, ensuring your CV stays up-to-date as your career evolves.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Vision & Mission -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-lg-6">
-                <div class="fade-in">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="feature-icon me-3">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3>Our Vision</h3>
-                    </div>
-                    <p>To be the world's most trusted partner in professional career advancement, empowering every individual to achieve their career aspirations through exceptional career documentation and guidance.</p>
-                    <p>We envision a world where talent meets opportunity seamlessly, where every professional has access to expert career support regardless of their background or location.</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="fade-in">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="feature-icon me-3">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h3>Our Mission</h3>
-                    </div>
-                    <p>To provide world-class resume writing and career documentation services that combine industry expertise, cutting-edge technology, and personalized attention to help professionals land their dream jobs.</p>
-                    <p>We are committed to delivering ATS-optimized, globally standardized career documents that truly represent our clients' unique value propositions.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Wave Divider -->
+<div class="wave-divider"></div>
 
-<!-- Why We're Different -->
-<section class="py-5">
+<!-- How We Elevate Careers -->
+<section class="section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="text-center mb-5">
-                    <h2 class="fade-in">Why We're Different</h2>
-                    <p class="lead fade-in">Setting new standards in professional career documentation</p>
+                    <h2 class="fade-in">How Our Expert Writers Elevate Your Career</h2>
                 </div>
                 
-                <div class="row g-4">
-                    <div class="col-lg-4">
-                        <div class="feature-card fade-in">
-                            <div class="feature-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h4>Expert Writers, Not Freelancers</h4>
-                            <p>Our team consists of professionally trained writers with backgrounds from top institutions, not random freelancers. Each writer undergoes rigorous training and quality assessments.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <div class="feature-card fade-in">
-                            <div class="feature-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <h4>Human + AI Optimization</h4>
-                            <p>Unlike pure AI tools, we combine human creativity and storytelling with AI-powered ATS optimization, ensuring your resume passes both robot screening and human evaluation.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <div class="feature-card fade-in">
-                            <div class="feature-icon">
-                                <i class="fas fa-globe-americas"></i>
-                            </div>
-                            <h4>Global Standards, Local Understanding</h4>
-                            <p>We understand both Indian job market nuances and international standards, providing resumes that work whether you're applying locally or globally.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <div class="feature-card fade-in">
-                            <div class="feature-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h4>2-Year Support Guarantee</h4>
-                            <p>We're the only company globally to offer 2 years of free updates and support. Your career evolves, and so should your resume—at no extra cost.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <div class="feature-card fade-in">
-                            <div class="feature-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h4>Proven Results</h4>
-                            <p>With over 80,000+ resumes delivered and clients placed at top companies like Google, Amazon, and Microsoft, our track record speaks for itself.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <div class="feature-card fade-in">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <h4>100% Confidentiality</h4>
-                            <p>Your personal and professional information is protected with bank-level security. We never share or store your data beyond the service period.</p>
-                        </div>
-                    </div>
+                <div class="fade-in">
+                    <p>
+                        Using the latest formats and industry insights, our writers create resumes that highlight your skills, experience, and aspirations with precision and style. 
+                        We offer competitive pricing with no compromise on quality—simply select the package that suits your experience and budget, and let our professionals handle the rest.
+                    </p>
+                    <p>
+                        Beyond resume writing, we offer a comprehensive range of career services including cover letters, visually enhanced CVs, mock interviews, resume marketing, and job search support. 
+                        Our secure online platform makes ordering seamless and trustworthy.
+                    </p>
+                    <p>
+                        With writers boasting up to 25 years of industry experience, Professional Writers is your strategic partner in career success—helping you open doors to opportunities across India, the UAE, the USA, the UK, and beyond.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Our Team -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center mb-5">
-                <h2 class="fade-in">Meet Our Expert Team</h2>
-                <p class="lead fade-in">Experienced professionals dedicated to your career success</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="team-card text-center fade-in">
-                    <div class="team-avatar mb-3">
-                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto" style="width: 120px; height: 120px; font-size: 2.5rem;">
-                            RS
-                        </div>
-                    </div>
-                    <h4>Rahul Sharma</h4>
-                    <p class="text-primary">Founder & CEO</p>
-                    <p class="text-muted">IIT Delhi, Ex-McKinsey</p>
-                    <p>15+ years experience in career counseling and talent acquisition. Led recruitment teams at top consulting firms.</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="team-card text-center fade-in">
-                    <div class="team-avatar mb-3">
-                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center mx-auto" style="width: 120px; height: 120px; font-size: 2.5rem;">
-                            PP
-                        </div>
-                    </div>
-                    <h4>Priya Patel</h4>
-                    <p class="text-primary">Head of Writing</p>
-                    <p class="text-muted">IIM Bangalore, Ex-Deloitte</p>
-                    <p>10+ years in professional writing and content strategy. Specialist in executive and international resumes.</p>
-                </div>
-            </div>
-            
-            <div class="col-lg-4">
-                <div class="team-card text-center fade-in">
-                    <div class="team-avatar mb-3">
-                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto" style="width: 120px; height: 120px; font-size: 2.5rem;">
-                            AK
-                        </div>
-                    </div>
-                    <h4>Amit Kumar</h4>
-                    <p class="text-primary">Technology Director</p>
-                    <p class="text-muted">IIT Bombay, Ex-Google</p>
-                    <p>12+ years in tech and product development. Leads our ATS optimization and technology initiatives.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Our Values -->
-<section class="py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h2 class="fade-in mb-5">Our Core Values</h2>
-                
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="value-card fade-in">
-                            <i class="fas fa-star text-primary fs-1 mb-3"></i>
-                            <h5>Excellence</h5>
-                            <p>We strive for perfection in every document we create, ensuring the highest quality standards.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="value-card fade-in">
-                            <i class="fas fa-handshake text-primary fs-1 mb-3"></i>
-                            <h5>Integrity</h5>
-                            <p>Honest communication, transparent pricing, and ethical business practices guide everything we do.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="value-card fade-in">
-                            <i class="fas fa-heart text-primary fs-1 mb-3"></i>
-                            <h5>Empathy</h5>
-                            <p>We understand the stress of job searching and provide compassionate, supportive service.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="value-card fade-in">
-                            <i class="fas fa-lightbulb text-primary fs-1 mb-3"></i>
-                            <h5>Innovation</h5>
-                            <p>Continuously improving our processes and staying ahead of industry trends and technologies.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Wave Divider -->
+<div class="wave-divider reverse"></div>
 
 <!-- Call to Action -->
-<section class="py-5" style="background: var(--gradient-primary);">
+<section class="py-5 cta-section" style="background: var(--gradient-primary);">
     <div class="container">
         <div class="row justify-content-center text-center text-white">
             <div class="col-lg-8">
-                <h2 class="fade-in mb-4">Ready to Transform Your Career?</h2>
-                <p class="lead fade-in mb-4">Join thousands of professionals who have successfully advanced their careers with our expert services.</p>
+                <h2 class="fade-in mb-4">Ready to Take the Next Step?</h2>
+                <p class="lead fade-in mb-4">
+                    Partner with Professional Writers—where your career story is crafted with expertise and care.
+                </p>
                 <div class="fade-in">
-                    <a href="{{ url_for('services') }}" class="btn btn-light btn-lg me-3">Explore Services</a>
-                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Get Free Consultation</a>
+                    <a href="{% url 'services' %}" class="btn btn-light btn-lg me-3">
+                        <i class="fas fa-rocket me-2"></i>Explore Services
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-comments me-2"></i>Get Free Consultation
+                    </a>
                 </div>
             </div>
         </div>

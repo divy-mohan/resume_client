@@ -27,13 +27,63 @@ class User(AbstractUser):
 
 class Service(models.Model):
     """Service offerings like Resume Writing, LinkedIn Optimization, etc."""
+    ICON_CHOICES = [
+        # Resume/CV Related Icons
+        ('fa-file-alt', 'Basic Document'),
+        ('fa-file-image', 'Visual/Infographic CV'),
+        ('fa-file-invoice', 'Professional CV'),
+        ('fa-chart-line', 'Infographic Elements'),
+        ('fa-palette', 'Visual Design'),
+        
+        # Job Hunt Related
+        ('fa-briefcase', 'Job/Career'),
+        ('fa-search', 'Job Search'),
+        ('fa-bullseye', 'Job Target'),
+        ('fa-handshake', 'Job Offer'),
+        ('fa-map-signs', 'Career Path'),
+        
+        # Academic Writing Related
+        ('fa-graduation-cap', 'Academic'),
+        ('fa-university', 'University'),
+        ('fa-book', 'Statement of Purpose'),
+        ('fa-envelope-open-text', 'Letter of Recommendation'),
+        ('fa-award', 'Achievements'),
+        
+        # LinkedIn/Social Related
+        ('fab fa-linkedin', 'LinkedIn'),
+        ('fas fa-user-tie', 'Professional Profile'),
+        ('fas fa-network-wired', 'Professional Network'),
+        ('fas fa-share-alt', 'Social Presence'),
+        ('fas fa-project-diagram', 'Network Growth'),
+        
+        # Additional Professional Icons
+        ('fa-certificate', 'Certifications'),
+        ('fa-star', 'Excellence'),
+        ('fa-trophy', 'Achievements'),
+        ('fa-medal', 'Awards'),
+        ('fa-crown', 'Premium Quality'),
+        ('fa-rocket', 'Career Launch'),
+        ('fa-lightbulb', 'Innovation'),
+    ]
+    
     name = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, blank=True)
     description = models.TextField()
     short_description = models.CharField(max_length=300)
-    icon = models.CharField(max_length=100, help_text="CSS class for icon")
+    icon = models.CharField(max_length=100, choices=ICON_CHOICES, help_text="Select an icon for the service")
+    
+
+    
+    # Display options
     is_active = models.BooleanField(default=True)
+    is_featured = models.BooleanField(default=False)
     order = models.IntegerField(default=0)
+    
+    # Legacy fields
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    booking_url = models.CharField(max_length=255, blank=True)
+    details_url = models.CharField(max_length=255, blank=True, help_text="URL name for Learn More button (e.g., 'linkedin_service', 'services')")
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -42,6 +92,20 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+        
+    def get_absolute_url(self):
+        return f"/service/{self.slug}/"
+        
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            from django.utils.text import slugify
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+    
+    def get_learn_more_url(self):
+        return self.details_url or 'services'
+    
+
 
 
 class ServicePackage(models.Model):
@@ -61,12 +125,12 @@ class ServicePackage(models.Model):
     revisions = models.IntegerField()
     is_popular = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    order = models.IntegerField(default=0)
+    display_order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['service', 'order', 'price_inr']
+        ordering = ['service', 'display_order', 'price_inr']
 
     def __str__(self):
         return f"{self.service.name} - {self.name}"
@@ -229,6 +293,8 @@ class ContactMessage(models.Model):
     """Contact form submissions"""
     name = models.CharField(max_length=100)
     email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)
+    service = models.CharField(max_length=50, blank=True)
     subject = models.CharField(max_length=200)
     message = models.TextField()
     is_responded = models.BooleanField(default=False)
@@ -239,3 +305,64 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"Message from {self.name} - {self.subject}"
+
+
+class BlogComment(models.Model):
+    """Blog post comments"""
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    comment = models.TextField()
+    is_approved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f"Comment by {self.name} on {self.post.title}"
+
+
+class SampleCategory(models.Model):
+    """Categories for resume samples"""
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(blank=True)
+    color = models.CharField(max_length=7, default='#007bff', help_text='Hex color code')
+    icon = models.CharField(max_length=50, default='fas fa-folder')
+    is_active = models.BooleanField(default=True)
+    order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name_plural = 'Sample Categories'
+
+    def __str__(self):
+        return self.name
+
+
+class ResumeSample(models.Model):
+    """Resume samples for portfolio"""
+    SAMPLE_TYPE_CHOICES = [
+        ('before', 'Before'),
+        ('after', 'After'),
+        ('standalone', 'Standalone'),
+    ]
+    
+    title = models.CharField(max_length=200)
+    category = models.ForeignKey(SampleCategory, on_delete=models.CASCADE, related_name='samples')
+    sample_type = models.CharField(max_length=20, choices=SAMPLE_TYPE_CHOICES, default='standalone')
+    image = models.ImageField(upload_to='samples/', help_text='A4 ratio image (210x297mm or 595x842px)')
+    is_featured = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    view_count = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-is_featured', '-created_at']
+
+    def __str__(self):
+        return f"{self.title} ({self.category.name})"
+    

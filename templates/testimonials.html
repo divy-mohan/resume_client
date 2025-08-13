@@ -72,7 +72,7 @@
                             {% if testimonial.client_photo %}
                             <img src="{{ testimonial.client_photo }}" alt="{{ testimonial.client_name }}" class="rounded-circle">
                             {% else %}
-                            {{ testimonial.client_name[0] }}
+                            {{ testimonial.client_name|first }}
                             {% endif %}
                         </div>
                         <div class="client-info">
@@ -91,10 +91,10 @@
                     </div>
                     
                     <div class="stars mb-3">
-                        {% for i in range(testimonial.rating) %}
+                        {% for i in testimonial.rating|make_list %}
                         <i class="fas fa-star"></i>
                         {% endfor %}
-                        {% for i in range(5 - testimonial.rating) %}
+                        {% for i in 5|make_list %}
                         <i class="far fa-star"></i>
                         {% endfor %}
                     </div>
@@ -323,8 +323,8 @@
                 <h2 class="fade-in mb-4">Ready to Join Our Success Stories?</h2>
                 <p class="lead fade-in mb-4">Take the first step toward transforming your career like thousands of professionals before you.</p>
                 <div class="fade-in">
-                    <a href="{{ url_for('services') }}" class="btn btn-light btn-lg me-3">Get Started</a>
-                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Free Consultation</a>
+                    <a href="{% url 'services{% " class="btn btn-light btn-lg me-3">Get Started</a>
+                    <a href="{% url 'contact{% " class="btn btn-outline-light btn-lg">Free Consultation</a>
                 </div>
             </div>
         </div>

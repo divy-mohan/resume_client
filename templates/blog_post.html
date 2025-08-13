@@ -11,7 +11,7 @@
                 <article class="fade-in">
                     <div class="blog-meta mb-3">
                         <small class="text-muted">
-                            <i class="fas fa-calendar me-2"></i>{{ post.created_at.strftime('%B %d, %Y') }}
+                            <i class="fas fa-calendar me-2"></i>{{ post.created_at.strftime('%B %d, %Y{% 
                             {% if post.author %}
                             <span class="ms-4">
                                 <i class="fas fa-user me-2"></i>{{ post.author }}
@@ -76,7 +76,7 @@
                             <div class="card-body text-center">
                                 <div class="author-avatar mb-3">
                                     <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px; font-size: 2rem;">
-                                        {{ post.author[0] if post.author else 'PW' }}
+                                        {{ post.author|first if post.author else 'PW' }}
                                     </div>
                                 </div>
                                 <h6>{{ post.author or 'Professional Writers Team' }}</h6>
@@ -93,7 +93,7 @@
                             </div>
                             <div class="card-body">
                                 <p>Subscribe for weekly career insights and job search strategies.</p>
-                                <form action="{{ url_for('subscribe_newsletter') }}" method="POST">
+                                <form action="{% url 'subscribe_newsletter{% " method="POST">
                                     <div class="mb-3">
                                         <input type="email" name="email" class="form-control" placeholder="Your email" required>
                                     </div>
@@ -122,9 +122,9 @@
             <div class="col-lg-4">
                 <div class="card h-100 fade-in">
                     <div class="card-body">
-                        <h6><a href="{{ url_for('blog_post', slug=related_post.slug) }}" class="text-decoration-none">{{ related_post.title }}</a></h6>
+                        <h6><a href="{% url 'blog_post', slug=related_post.slug) }}" class="text-decoration-none">{{ related_post.title }}</a></h6>
                         <p class="text-muted small">{{ related_post.excerpt or related_post.content[:100] + '...' }}</p>
-                        <small class="text-muted">{{ related_post.created_at.strftime('%B %d, %Y') }}</small>
+                        <small class="text-muted">{{ related_post.created_at.strftime('%B %d, %Y{% </small>
                     </div>
                 </div>
             </div>
@@ -142,8 +142,8 @@
                 <h2 class="fade-in mb-4">Ready to Take Action?</h2>
                 <p class="lead fade-in mb-4">Don't just read about career success - achieve it with our professional services.</p>
                 <div class="fade-in">
-                    <a href="{{ url_for('services') }}" class="btn btn-light btn-lg me-3">Our Services</a>
-                    <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">Free Consultation</a>
+                    <a href="{% url 'services{% " class="btn btn-light btn-lg me-3">Our Services</a>
+                    <a href="{% url 'contact{% " class="btn btn-outline-light btn-lg">Free Consultation</a>
                 </div>
             </div>
         </div>

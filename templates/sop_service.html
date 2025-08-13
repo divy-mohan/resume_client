@@ -1,0 +1,350 @@
+{% extends "base.html" %}
+
+{% block title %}SOP Writing Services - Professional Writers{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --sop-primary: #e17055;
+    --sop-secondary: #fdcb6e;
+    --sop-accent: #fd79a8;
+    --sop-gradient: linear-gradient(135deg, #e17055 0%, #fdcb6e 50%, #fd79a8 100%);
+}
+
+.sop-hero {
+    background: var(--sop-gradient);
+    position: relative;
+    overflow: hidden;
+}
+
+.sop-hero::before {
+    content: '📌';
+    position: absolute;
+    font-size: 4rem;
+    top: 10%;
+    right: 15%;
+    opacity: 0.2;
+    animation: bounce 3s ease-in-out infinite;
+}
+
+.sop-hero::after {
+    content: '✍️';
+    position: absolute;
+    font-size: 3rem;
+    bottom: 20%;
+    left: 10%;
+    opacity: 0.2;
+    animation: bounce 4s ease-in-out infinite reverse;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.sop-card {
+    background: linear-gradient(145deg, #ffffff 0%, #fef9f3 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(225,112,85,0.15);
+    transition: all 0.4s ease;
+    border: 2px solid rgba(225,112,85,0.1);
+    position: relative;
+}
+
+.sop-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--sop-gradient);
+    border-radius: 20px 20px 0 0;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.sop-card:hover::before {
+    transform: scaleX(1);
+}
+
+.sop-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(225,112,85,0.25);
+}
+
+.sop-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--sop-gradient);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.sop-card:hover .sop-icon {
+    transform: scale(1.1) rotate(-10deg);
+}
+
+.sop-pricing {
+    background: linear-gradient(145deg, #ffffff 0%, #fef9f3 100%);
+    border-radius: 25px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 15px 35px rgba(225,112,85,0.1);
+    transition: all 0.4s ease;
+    border: 2px solid rgba(225,112,85,0.1);
+}
+
+.sop-pricing:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(225,112,85,0.2);
+}
+
+.sop-pricing .pricing-price {
+    color: var(--sop-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.sop-pricing .btn {
+    background: var(--sop-gradient);
+    border: none;
+    border-radius: 15px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+}
+
+.sop-list {
+    list-style: none;
+    padding: 0;
+}
+
+.sop-list li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.sop-list li::before {
+    content: '📌';
+    position: absolute;
+    left: 0;
+    font-size: 1rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="sop-hero" style="min-height: 70vh;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content fade-in">
+                    <h1 class="hero-title text-white">SOP Writing Services</h1>
+                    <p class="hero-subtitle text-white">Crafting Your Future: Why a Professionally Written SOP Is Essential for Admission Success</p>
+                    <div class="hero-buttons">
+                        <a href="#packages" class="btn btn-light btn-lg">View Packages</a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="slide-in-right">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                         alt="SOP Writing" class="img-fluid rounded-3 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Introduction Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Your Gateway to Global Universities</h2>
+                <p class="lead fade-in">A Statement of Purpose (SOP) is a pivotal component of any university application</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="sop-card fade-in text-center">
+                    <div class="sop-icon mx-auto">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <p>A Statement of Purpose serves as a personal and academic narrative that articulates your goals, motivation, and suitability for the program. An effectively written SOP can significantly influence admission decisions, especially at leading institutions across the USA, UK, Canada, Australia, the UAE, and beyond.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Section -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">Why Choose Professional Writers for Your SOP?</h2>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-card fade-in">
+                    <div class="sop-icon">
+                        📌
+                    </div>
+                    <h5>Customized Content</h5>
+                    <p>Tailored to your course, academic background, and university requirements</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-card fade-in">
+                    <div class="sop-icon">
+                        ✍️
+                    </div>
+                    <h5>Professional Tone & Structure</h5>
+                    <p>Written with clarity, coherence, and purpose</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-card fade-in">
+                    <div class="sop-icon">
+                        🌍
+                    </div>
+                    <h5>Global Reach</h5>
+                    <p>Expertise in SOPs for top universities in the USA, UK, Canada, Australia, UAE & more</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-card fade-in">
+                    <div class="sop-icon">
+                        🔄
+                    </div>
+                    <h5>Unlimited Revisions</h5>
+                    <p>Collaborative approach until you're fully satisfied</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-card fade-in">
+                    <div class="sop-icon">
+                        ⏱
+                    </div>
+                    <h5>Quick Turnaround</h5>
+                    <p>Timely delivery without compromising quality</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-card fade-in">
+                    <div class="sop-icon">
+                        🎯
+                    </div>
+                    <h5>Targeted Approach</h5>
+                    <p>Your ambitions deserve the right words—let us help you make a lasting first impression</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Packages Section -->
+<section id="packages" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fade-in">SOP Writing Packages</h2>
+                <p class="lead fade-in">Professional SOPs that open doors to your dream university</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-pricing fade-in">
+                    <h4>Standard SOP</h4>
+                    <div class="pricing-price">₹4,999</div>
+                    <p class="text-muted">$65 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Professional SOP writing</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>University-specific content</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Academic background focus</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>3 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>2 revisions included</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-pricing fade-in">
+                    <h4>Premium SOP</h4>
+                    <div class="pricing-price">₹7,999</div>
+                    <p class="text-muted">$105 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Advanced SOP crafting</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Multiple university versions</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Career goals alignment</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Research methodology focus</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>5 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Unlimited revisions</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="sop-pricing fade-in">
+                    <h4>Elite SOP</h4>
+                    <div class="pricing-price">₹12,999</div>
+                    <p class="text-muted">$170 USD</p>
+                    
+                    <ul class="pricing-features">
+                        <li class="included"><i class="fas fa-check me-2"></i>Premium SOP writing</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Top-tier university focus</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Personal branding strategy</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Interview preparation guide</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>7 working days delivery</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>Unlimited revisions</li>
+                        <li class="included"><i class="fas fa-check me-2"></i>1-year consultation support</li>
+                    </ul>
+                    
+                    <a href="{% url 'contact' %}" class="btn btn-primary w-100">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5" style="background: var(--sop-gradient);">
+    <div class="container">
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-lg-8">
+                <h2 class="fade-in mb-4">Ready to Craft Your Future?</h2>
+                <p class="lead fade-in mb-4">At Professional Writers, we specialize in developing high-quality, personalized SOPs that reflect your academic journey, career aspirations, and individual strengths.</p>
+                <div class="fade-in">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg me-3">Start Your SOP</a>
+                    <a href="{% url 'samples' %}" class="btn btn-outline-light btn-lg">View Samples</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
